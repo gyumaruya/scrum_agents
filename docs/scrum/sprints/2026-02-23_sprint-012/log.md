@@ -1,0 +1,36 @@
+# Sprint 12 Log
+
+- 2026-02-23 01:00 - Sprint 12 Planning 完了。P25, P26, P27 を選択。
+- 2026-02-23 01:15 - P25 実装開始。/scrum update カスタマイズ保持検証。
+- 2026-02-23 01:25 - P25 検証完了:
+  - Rules 3ファイル: テンプレートとプロジェクトファイル完全一致（Sprint 11 上流統合の効果を確認）
+  - ルールファイル置換を実行 -> before/after diff: 変化なし（カスタマイズ保持を実証）
+  - Agent 3ファイル: プロジェクト固有セクション（Environment, Scrum Values, Retro フォーマット改善）が存在、マージ戦略で保持される
+  - DoD: プロジェクト適応済みセクション（Testing, Transparency）が保持される
+  - CLAUDE.md: Scrum (v1.2.0) セクション正しく存在
+  - インストール済み SKILL.md とソース SKILL.md: 完全一致（20317 bytes）
+  - SKILL.md の Customization Preservation セクションに上流統合注記が存在し機能中
+- 2026-02-23 01:30 - P26 実装完了: SM エージェント定義 + sprint-retrospective.md に安定期改善ガイドライン追加。Sprint 8-10 レトロ品質分析を decisions.md に記録。
+- 2026-02-23 01:35 - P27 実装完了: Developer エージェント定義に Real-Time Problem Recording セクション追加。Daily Scrum に Problem Log Review ステップ追加。
+- 2026-02-23 01:40 - バージョンバンプ 1.2.0 -> 1.3.0 (Minor: 新セレモニーステップ + エージェント機能追加)
+- 2026-02-23 01:45 - DoD Self-Inspection: P25
+  - Quality: pass (検証実行成功、全ルールファイル一致確認)
+  - Testing: pass (YAML frontmatter 有効、symlink 存在)
+  - Versioning: pass (1.2.0 -> 1.3.0, .scrum-version 更新済み)
+  - Transparency: pass (sprint log 更新済み)
+  - Scrum: pass (AC 3項目全て充足)
+  - Result: ALL PASS
+- 2026-02-23 01:45 - DoD Self-Inspection: P26
+  - Quality: pass (SM 定義 + retro 定義に安定期ガイドライン追加)
+  - Testing: pass (YAML frontmatter 有効)
+  - Versioning: pass (P25 と同一バージョンバンプ)
+  - Transparency: pass (decisions.md にレトロ品質分析記録)
+  - Scrum: pass (AC 3項目全て充足)
+  - Result: ALL PASS
+- 2026-02-23 01:45 - DoD Self-Inspection: P27
+  - Quality: pass (Developer 定義に即時記録手順追加、Daily Scrum にレビューステップ追加)
+  - Testing: pass (YAML frontmatter 有効)
+  - Versioning: pass (P25 と同一バージョンバンプ)
+  - Transparency: pass (sprint log 更新済み)
+  - Scrum: pass (AC 3項目全て充足)
+  - Result: ALL PASS

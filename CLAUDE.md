@@ -58,7 +58,7 @@ cd /path/to/other/project
 
 `.claude/docs/DESIGN.md` に記録。
 
-## Scrum (v1.2.0)
+## Scrum (v1.3.0)
 
 このプロジェクトは Scrum で運用されている。`/scrum` スキルが導入済み。
 

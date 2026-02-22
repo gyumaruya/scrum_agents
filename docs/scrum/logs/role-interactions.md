@@ -429,3 +429,71 @@ P24 のみ needs-revision。SKILL.md の metadata.version は 1.2.0 に正しく
    - 発見（19:15）が修正記録（16:30）より時系列後に発生
    - adaptations.md のタイムスタンプが誤記されている可能性あり。実際の修正実施時刻は 19:15 以降と考えられる
    - 修正推奨: adaptations.md の「2026-02-22 16:30」を正確な実施時刻に更新するか、「Trigger」時刻と「Change」実施時刻を分離記録すべき
+
+## 2026-02-23 -- PO: Sprint 12 Acceptance Inspection (Review Step 2)
+
+**Context**: Sprint 12 Review -- PO が Dev のインクリメントを受入検査
+**Artifact**: scrum-master.md (Retrospective Quality), sprint-retrospective.md (安定期レンズ), scrum-developer.md (Real-Time Problem Recording), daily-scrum.md (Problem Log Review), decisions.md (Sprint 8-10 分析), scrum-*.md ルールファイル3点, SKILL.md
+**Review Result**: 3/3 items approved
+
+**Notes**:
+
+### AC 別判定
+
+| Item | AC | 判定 |
+|------|-----|------|
+| P25 | scrum-*.md 3ファイルのカスタマイズ保持確認 | approved -- テンプレートとプロジェクトファイルが完全一致（IDENTICAL）。上流統合が機能。 |
+| P25 | 更新前後の diff 記録 | approved -- current.md ログに詳細な比較結果（Rules, Agent, DoD, CLAUDE.md, SKILL.md）が記録済み。 |
+| P25 | SKILL.md 上流統合フロー注記の機能確認 | approved -- Customization Preservation セクションの注記が存在し、テンプレート=プロジェクトの一致が実証。 |
+| P26 | SM エージェント定義に安定期改善ガイドライン追加 | approved -- テンプレート/プロジェクト両方に Retrospective Quality (MANDATORY) セクション。6観点+「NEVER acceptable」表現。 |
+| P26 | sprint-retrospective.md に安定期改善レンズ記載 | approved -- Step 2 に Stable-period improvement discovery テーブル（6 Lens）追加。 |
+| P26 | Sprint 8-10 レトロ品質差分析の記録 | approved -- decisions.md に Sprint 1-11 全レトロの品質分析テーブルとパターン特定が記録。 |
+| P27 | Developer 定義に即時記録手順 | approved -- Real-Time Problem Recording (MANDATORY) セクション。3ステップ+テンプレート+Sprint 11 実例。 |
+| P27 | Daily Scrum に Problem Log Review ステップ | approved -- Step 3 として追加。failures.md/adaptations.md 確認+対処検証+未記録問題検出。 |
+| P27 | Sprint 中問題放置パターンの構造的防止 | approved -- Developer 即時記録 + SM Daily Review + SM Inspect 二重チェックの3層構造。 |
+
+### PO 所見
+
+Sprint 12 の3アイテムすべてが全 AC を達成しており、Sprint Goal「/scrum update の安全性を実証し、プロセス改善の品質を安定させる」は完全に達成された。
+
+特筆すべき品質:
+- P25 は「対策したが検証していない」パターン（Sprint 3, 8, 11 で繰り返し発生）に対する初の完全な実証検証。テンプレートとプロジェクトファイルの完全一致を diff で証明し、上流統合フローが機能することを実動作で確認した。
+- P26 は過去11スプリント分のレトロ品質を定量的に分析し、安定期の品質低下パターンを特定した上で、SM 定義とセレモニー定義の両方に構造的対策を実装した。分析の深さと対策の具体性が高い。
+- P27 は Sprint 11 で発生した「問題がReviewまで放置される」事例を教訓に、Developer の即時記録義務 + SM の Daily Review + SM の二重チェックという3層の防止策を構築した。テンプレートとプロジェクトの両方に反映されており、他プロジェクトにも展開可能。
+
+このスプリントの品質が高い要因: 3アイテムとも過去スプリントの具体的失敗に基づいており、対策と検証が一体化している。
+
+## 2026-02-23 -- SM: Sprint 12 Retrospective (Steps 1-4)
+
+**Context**: Sprint 12 Retrospective -- SM が P26 で導入した安定期改善発見レンズを初めて適用
+**Artifact**: `docs/scrum/sprints/2026-02-23_sprint-012/retrospective.md`, `skills/scrum/references/agents/scrum-master.md` (テンプレート上流統合)
+**Review Result**: N/A (SM 実行)
+
+**Notes**:
+
+### 安定期改善発見レンズの適用結果
+
+P26 で導入した6つのレンズのうち、以下の2つで具体的な知見を検出:
+
+1. **Template Drift レンズ**: エージェント定義3ファイル（SM, Developer, PO）でプロジェクト固有セクションがテンプレートに未統合であることを検出。Sprint 11 でルールファイル3点の上流統合を完了していたが、エージェント定義は見落としていた。SM テンプレートに Sprint archival 責務行、改善追跡テーブル、フォーマット原則を上流統合した。
+
+2. **Ceremony Quality レンズ**: Sprint 12 中の failures.md/adaptations.md エントリがゼロ。P27 の定義と実行が同一 Sprint であるため（P19 と同じ構造）、次 Sprint での実証が必要。
+
+### Concrete Change
+
+`skills/scrum/references/agents/scrum-master.md` テンプレートに以下を上流統合:
+- Sprint archival 責務の明記（Role Boundary セクション）
+- 改善追跡テーブル（Retrospective Record Format）
+- フォーマット原則（変化と価値のセット記述、証拠必須、ステークホルダー影響の可視化）
+- Metrics の詳細化（Blockers resolved, Cross-role interactions, New backlog items）
+
+## 2026-02-23 -- SM: Sprint 12 Archival (Retro Step 5-6)
+
+**Context**: Sprint 12 Retrospective -- SM が sprint-retrospective.md Step 5/6 に従いアーカイブを作成
+**Artifact**: `docs/scrum/sprints/2026-02-23_sprint-012/` (plan.md, log.md, review.md, retrospective.md), `docs/scrum/sprints/current.md` (リセット)
+**Review Result**: N/A (SM 実行)
+
+**Notes**:
+- 既存アーカイブ数: 12 (sprint-001 ~ 011) -> 新規: sprint-012
+- ディレクトリ名: 2026-02-23_sprint-012 (Retro 実行日 + ゼロパディング3桁)
+- current.md を「No active sprint. Backlog has items -- ready for Sprint Planning.」にリセット
