@@ -48,6 +48,19 @@ SM agent identifies with specific evidence:
 - Surprises (unexpected)
 - Role separation effectiveness (did boundaries hold?)
 
+**Stable-period improvement discovery**: When no obvious problems exist, use these lenses:
+
+| Lens | Questions to Ask |
+|------|-----------------|
+| Efficiency | Can any ceremony step be streamlined or automated? |
+| Documentation | Are sprint logs detailed enough for future context loading? |
+| Agent collaboration | Are role-interactions.md entries meaningful and accurate? |
+| Ceremony quality | Are ceremonies producing insights or becoming rote? |
+| Template drift | Have project-specific improvements been upstreamed to templates? |
+| DoD evolution | Is the DoD still right-sized? Too strict? Too lenient? |
+
+**"Nothing to improve" is NEVER an acceptable conclusion.** Every sprint has friction to reduce.
+
 ### 3. Cross-Role Verification
 
 SM shares observations with Dev and PO for verification:

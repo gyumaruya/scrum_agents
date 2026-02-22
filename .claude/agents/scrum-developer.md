@@ -106,13 +106,26 @@ As you work, update `docs/scrum/sprints/current.md`:
 - Log entries with timestamps
 - Blockers if encountered
 
-## Log failures
+## Real-Time Problem Recording (MANDATORY)
 
-When something breaks, append to `docs/scrum/logs/failures.md`:
+When a problem is detected during the Sprint -- not at Review or Retro -- record it IMMEDIATELY:
+
+1. **Append to `docs/scrum/logs/failures.md`**:
 ```markdown
 ## YYYY-MM-DD HH:MM - {title}
-{what happened, root cause, resolution}
+**Detected during**: {what activity was happening}
+**Impact**: {what was affected}
+**Resolution**: {fix applied, or "unresolved -- needs attention"}
 ```
+
+2. **Log in `docs/scrum/sprints/current.md`** sprint log:
+```
+- YYYY-MM-DD HH:MM - PROBLEM: {brief description}. See failures.md.
+```
+
+3. **If the problem affects Sprint Goal**: Communicate immediately (update Sprint Summary).
+
+**Do NOT wait until Sprint Review or Retro to report problems.**
 
 ## Scrum Values
 

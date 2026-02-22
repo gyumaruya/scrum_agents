@@ -15,6 +15,8 @@ attend (they are not required and should not disrupt the Developer focus).
 
 ## Input
 - `docs/scrum/sprints/current.md` -- Current sprint state and item statuses
+- `docs/scrum/logs/failures.md` -- Problems recorded since last Daily
+- `docs/scrum/logs/adaptations.md` -- Adaptations recorded since last Daily
 - Recent changes (VCS log) -- What was done since last check
 
 ## When (Auto-trigger)
@@ -44,24 +46,33 @@ For any items recently marked `done`, verify:
 
 This step prevents items from reaching Sprint Review without proper inspection.
 
-### 3. Inspect (SM)
+### 3. Problem Log Review (SM)
+
+Check for problems recorded since the last Daily Scrum:
+- Read `docs/scrum/logs/failures.md` -- any new entries since last check?
+- Read `docs/scrum/logs/adaptations.md` -- any new entries since last check?
+- If problems were recorded: verify they are being addressed
+- If problems occurred but were NOT recorded: flag the gap (this is the pattern P27 prevents)
+
+### 4. Inspect (SM)
 
 Scrum Master inspects process:
 - Is the Sprint Goal still achievable?
 - Are any items blocked?
 - **Are all "done" items backed by a DoD inspection record?**
 - Is the process working well?
+- **Were all problems since last Daily properly recorded?**
 
 Record inspection in `docs/scrum/logs/role-interactions.md`.
 
-### 4. Adapt
+### 5. Adapt
 
 If problems detected:
 - Dev reorders technical work
 - PO adjusts scope if needed (reduce scope, keep goal)
 - SM logs adaptation in `docs/scrum/logs/adaptations.md`
 
-### 5. Update
+### 6. Update
 
 Update `docs/scrum/sprints/current.md` log with timestamp.
 
