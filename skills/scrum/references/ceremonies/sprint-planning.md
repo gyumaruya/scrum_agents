@@ -51,6 +51,8 @@ Developer agent:
 - Identify risks and unknowns
 - Note in `docs/scrum/logs/decisions.md` if significant choices are made
 
+**Ownership:** The Sprint Backlog belongs to the Developers. Only they can modify it during the Sprint.
+
 ### 4. Process Inspection
 
 Spawn `scrum-master` agent to inspect:

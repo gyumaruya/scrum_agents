@@ -70,6 +70,9 @@ Pick the most impactful improvement. Actually edit the file:
 
 **Every change must cite evidence from this sprint.**
 
+**Note:** Identified improvements that are actionable may be added to the Sprint Backlog
+for the next Sprint. The most impactful improvement should be addressed as soon as possible.
+
 ### 5. Archive Sprint (SM executes)
 
 **Executor: SM agent.** This step is the SM's responsibility after completing Steps 1-4.

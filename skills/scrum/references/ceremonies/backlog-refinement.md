@@ -16,8 +16,14 @@
 
 ## When
 
+**Refinement is NOT a formal Scrum event.** It is an ongoing activity that happens
+throughout the Sprint as needed. The PO and Developers collaborate on understanding
+and decomposing Product Backlog items.
+
+Typical triggers:
 - Between sprints
 - New stakeholder desires emerge mid-sprint (add to backlog, don't disrupt sprint)
+- Top backlog items lack sufficient detail for next Sprint Planning
 - Manual: `/scrum refine`
 
 ## Process
