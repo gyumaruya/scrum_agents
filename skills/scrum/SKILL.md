@@ -239,13 +239,14 @@ PO agent → create backlog → Sprint Planning → Dev starts.
 
 ## Sprint Archival
 
-After retrospective:
+**Executor: SM agent** -- after Retrospective Step 4 completes.
 
-1. Create `docs/scrum/sprints/YYYY-MM-DD_sprint-NNN/`
-2. Save: `plan.md`, `log.md`, `review.md`, `retrospective.md`
-3. Reset `docs/scrum/sprints/current.md`
-4. If external tracker: update item statuses (close completed items, etc.)
-5. Commit the archive
+1. **Determine sprint number**: Count existing `sprint-NNN` directories in `docs/scrum/sprints/`, add 1, zero-pad to 3 digits
+2. Create `docs/scrum/sprints/YYYY-MM-DD_sprint-NNN/` (date = retrospective execution date)
+3. Save: `plan.md`, `log.md`, `review.md`, `retrospective.md` (extracted from `current.md` and retrospective output)
+4. Reset `docs/scrum/sprints/current.md` to: `No active sprint. Backlog has items -- ready for Sprint Planning.`
+5. If external tracker: update item statuses (close completed items, etc.)
+6. Commit the archive
 
 ---
 

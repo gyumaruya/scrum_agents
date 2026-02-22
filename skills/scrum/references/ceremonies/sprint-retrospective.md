@@ -61,17 +61,32 @@ Pick the most impactful improvement. Actually edit the file:
 
 **Every change must cite evidence from this sprint.**
 
-### 5. Archive Sprint
+### 5. Archive Sprint (SM executes)
 
-Create `docs/scrum/sprints/YYYY-MM-DD_sprint-NNN/` and save:
-- `plan.md` -- Sprint Goal, selected items, approach
-- `log.md` -- Copy of daily log from current sprint
-- `review.md` -- Review outcome and stakeholder feedback
-- `retrospective.md` -- This retrospective's findings and changes
+**Executor: SM agent.** This step is the SM's responsibility after completing Steps 1-4.
 
-### 6. Reset Current Sprint
+Create the sprint archive directory and save artifacts:
 
-Clear `docs/scrum/sprints/current.md` for next sprint.
+1. **Determine sprint number**: Count existing `sprint-NNN` directories in `docs/scrum/sprints/`, add 1, zero-pad to 3 digits.
+2. **Determine date**: Use the date the retrospective is executed (today).
+3. **Create directory**: `docs/scrum/sprints/YYYY-MM-DD_sprint-NNN/`
+4. **Save 4 files** from `current.md` content:
+   - `plan.md` -- Sprint Goal, selected items, implementation steps (from current.md header + Selected Items + Implementation Steps sections)
+   - `log.md` -- Progress log (from current.md Log section)
+   - `review.md` -- Review outcome and stakeholder feedback (written during Sprint Review)
+   - `retrospective.md` -- This retrospective's findings and changes (from Steps 1-4 above)
+
+### 6. Reset Current Sprint (SM executes)
+
+**Executor: SM agent.** Reset immediately after archival.
+
+Replace `docs/scrum/sprints/current.md` contents with:
+
+```markdown
+# Current Sprint
+
+No active sprint. Backlog has items -- ready for Sprint Planning.
+```
 
 ### 7. Commit
 
