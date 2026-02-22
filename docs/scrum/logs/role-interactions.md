@@ -566,3 +566,34 @@ P26 で導入した6つのレンズを全て適用（Sprint 12 では Template D
 - 既存アーカイブ数: 12 (sprint-001 ~ 012) -> 新規: sprint-013
 - ディレクトリ名: 2026-02-23_sprint-013 (Retro 実行日 + ゼロパディング3桁)
 - current.md を「No active sprint. Backlog has items -- ready for Sprint Planning.」にリセット
+
+## 2026-02-23 -- PO: Sprint 14 Acceptance Inspection (Review Step 2)
+
+**Context**: Sprint 14 Review -- PO が Dev のインクリメントを受入検査
+**Artifact**: `/tmp/scrum-e2e-test` (E2E 検証結果), `skills/scrum/SKILL.md` (監査・修正), `docs/scrum/.scrum-version`
+**Review Result**: 2/2 items approved
+
+**Notes**:
+
+### AC 別判定
+
+| Item | AC | 判定 |
+|------|-----|------|
+| P29 | 新規プロジェクトでスキルインストール | approved |
+| P29 | 初回セットアップでファイル構造生成 | approved |
+| P29 | Sprint 11-13 改善の反映確認 | approved |
+| P29 | `/scrum update` バージョン管理 | approved |
+| P30 | 各セクション動作一致確認 | approved |
+| P30 | Sprint 11-13 機能の正確な記述確認 | approved |
+| P30 | 不正確な記述の修正 | approved -- 3件修正 |
+
+## 2026-02-23 -- SM: Sprint 14 Retrospective + Archival (Steps 1-6)
+
+**Context**: Sprint 14 Retrospective -- SM が安定期改善発見レンズ（3回目）を適用。Sprint 14 アーカイブを作成。
+**Artifact**: `docs/scrum/sprints/2026-02-23_sprint-014/` (plan.md, log.md, review.md, retrospective.md), `skills/scrum/SKILL.md` (ハードコード数値修正)
+**Review Result**: N/A (SM 実行)
+
+**Notes**:
+- Concrete Change: SKILL.md の "Anti-Patterns table (all 9)" を "Anti-Patterns table (all entries)" に変更。数値ハードコードによる将来の陳腐化を防止。
+- 既存アーカイブ数: 13 (sprint-001 ~ 013) -> 新規: sprint-014
+- current.md をリセット（バックログ空、Product Goal 達成）

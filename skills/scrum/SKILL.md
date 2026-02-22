@@ -330,7 +330,7 @@ Append `## Scrum (v{version})` section to CLAUDE.md. This section MUST include:
 - Artifact locations (backlog, sprint, DoD, logs)
 - Ceremony Auto-Flow diagram
 - Flow Rules (all 5)
-- Anti-Patterns table (all 9)
+- Anti-Patterns table (all entries)
 
 **This is critical.** Without this section in CLAUDE.md, new sessions won't load
 Scrum rules automatically. The `/scrum` skill is only invoked on demand -- CLAUDE.md
