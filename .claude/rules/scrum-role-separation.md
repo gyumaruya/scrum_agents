@@ -85,13 +85,6 @@ Format:
 **Notes**: {feedback or observations}
 ```
 
-## This Project's Adaptations
-
-- Agent definitions: `.claude/agents/scrum-{product-owner,master,developer}.md`
-- All three include role boundary sections and violation guards
-- Interaction log: `docs/scrum/logs/role-interactions.md`
-- Ceremony definitions reference this rule and the interaction log
-
 ## Enforcement
 
 This is a rule-based (not technical) enforcement. Each agent definition includes:
@@ -100,5 +93,4 @@ This is a rule-based (not technical) enforcement. Each agent definition includes
 - Instruction to log boundary events
 
 If rule-based enforcement proves insufficient, escalate to technical enforcement
-(hooks, scripts) in a future sprint. Evidence of violations will be tracked in
-`docs/scrum/logs/role-interactions.md` and evaluated during retrospectives.
+(hooks, scripts) in a future sprint.

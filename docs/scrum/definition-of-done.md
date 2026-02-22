@@ -16,22 +16,22 @@ An Increment is "Done" when ALL criteria are met:
 
 ## Versioning (MANDATORY for skill file changes)
 
-- [ ] SKILL.md `metadata.version` をバージョニングポリシーに従ってバンプ済み
-- [ ] `docs/scrum/.scrum-version` を一致させる（`/scrum update` または手動）
-- [ ] バージョンバンプの理由を sprint log または decisions.md に記録
+- [ ] SKILL.md `metadata.version` bumped according to versioning policy
+- [ ] `docs/scrum/.scrum-version` updated to match (via `/scrum update` or manually)
+- [ ] Version bump rationale recorded in sprint log or decisions.md
 
-**バージョニングポリシー (SemVer):**
-- **Major** (X.0.0): 破壊的変更 -- ファイル構造変更、機能削除、セレモニーフロー非互換
-- **Minor** (x.Y.0): 新機能 -- セレモニーステップ追加、エージェント機能追加、テンプレート新セクション
-- **Patch** (x.y.Z): 修正 -- 文言改善、バグ修正、テンプレート微調整、クリーンアップ
+**Versioning Policy (SemVer):**
+- **Major** (X.0.0): Breaking changes -- file structure changes, removed features, incompatible ceremony flow
+- **Minor** (x.Y.0): New features -- new ceremony steps, new agent capabilities, new sections in templates
+- **Patch** (x.y.Z): Fixes -- wording improvements, bug fixes, template tweaks, cleanup
 
-## Delivery Verification (MANDATORY for skill file changes)
+## Delivery Verification (MANDATORY for skill/process file changes)
 
-- [ ] 変更を main にマージ済み
-- [ ] インストール済みスキルにコピー済み (`cp -R skills/scrum/* ~/.agents/skills/scrum/`)
-- [ ] セッションをリロード済み (`/reload`)
-- [ ] リロード後に `/scrum status` または `/scrum update` を実行し、変更が反映されていることを確認
-- [ ] 確認結果を sprint log に記録
+- [ ] Changes merged to main
+- [ ] Installed skill files updated (copy source to installed location)
+- [ ] Session reloaded (`/reload` or equivalent)
+- [ ] Post-reload verification: run `/scrum status` or `/scrum update` to confirm changes are live
+- [ ] Verification result recorded in sprint log
 
 ## Transparency
 
@@ -46,8 +46,8 @@ An Increment is "Done" when ALL criteria are met:
 
 - [ ] Acceptance criteria from backlog item are met
 - [ ] Increment is usable (not half-finished)
-- [ ] current.md の Item Status が PO Review 判定と一致している（approved / needs-revision）
-- [ ] role-interactions.md に PO Review の履歴（Review Result, Notes）が記録されている
+- [ ] Item status in current.md matches PO Review result (approved / needs-revision)
+- [ ] PO Review history is recorded in the role interactions log
 
 ---
 
