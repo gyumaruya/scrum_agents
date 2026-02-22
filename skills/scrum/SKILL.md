@@ -223,7 +223,12 @@ When `docs/scrum/` does NOT exist:
 Read reference files from `references/` and **adapt** them to the project:
 
 **Scrum records** (`docs/scrum/`):
-- `definition-of-done.md` ← adapt to detected tech stack (testing tools, quality checks)
+- `definition-of-done.md` ← adapt the `{Adapt to project}` placeholder in the Testing section based on Step 1 detection results:
+  - **Python** (`pyproject.toml` + pytest): `"pytest passes"`, and if ruff detected: `"ruff check passes"`
+  - **Node.js** (`package.json` + jest/vitest): `"npm test passes"`, and if eslint detected: `"eslint passes"`
+  - **Rust** (`Cargo.toml`): `"cargo test passes"`, and if clippy detected: `"cargo clippy passes"`
+  - **No test framework detected**: `"Manual verification documented in review.md"`
+  - Replace the entire `{Adapt to project ...}` block with the concrete check items. Do not leave the placeholder.
 - `sprints/current.md` ← empty sprint template
 - `logs/failures.md` ← empty with header
 - `logs/decisions.md` ← empty with header

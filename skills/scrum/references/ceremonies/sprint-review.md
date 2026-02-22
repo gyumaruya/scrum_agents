@@ -89,6 +89,13 @@ Product Owner agent:
 Save to sprint archive later (during archival after retro).
 Update `docs/scrum/sprints/current.md` log with review outcome.
 
+## Output
+
+- Increment presented to stakeholder with value-focused summary
+- PO acceptance inspection recorded in `role-interactions.md`
+- Backlog updated with feedback and re-ordered
+- Review outcome logged in `current.md`
+
 ## Auto-next
 
 **Do NOT wait for stakeholder feedback.** Present the increment, ask for feedback,
