@@ -17,6 +17,7 @@ An Increment is "Done" when ALL criteria are met:
 ## Transparency
 
 - [ ] Changes committed to git with descriptive message
+- [ ] All changes staged and committed (no uncommitted files at done)
 - [ ] PR updated or created for stakeholder review
 - [ ] Sprint log updated with what was done and why
 
