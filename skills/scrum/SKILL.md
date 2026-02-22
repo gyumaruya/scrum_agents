@@ -167,10 +167,10 @@ When `docs/scrum/` does NOT exist:
 
 ### Step 2: Create Local Structure
 
-Read reference files from `references/` and write to the project:
+Read reference files from `references/` and **adapt** them to the project:
 
 **Scrum records** (`docs/scrum/`):
-- `definition-of-done.md` ← adapt to detected tech stack
+- `definition-of-done.md` ← adapt to detected tech stack (testing tools, quality checks)
 - `sprints/current.md` ← empty sprint template
 - `logs/failures.md` ← empty with header
 - `logs/decisions.md` ← empty with header
@@ -178,10 +178,14 @@ Read reference files from `references/` and write to the project:
 
 If no external issue tracker: also create `backlog.md` from template.
 
-**Agents** (`.claude/agents/`):
-- `scrum-product-owner.md`
+**Agents** (`.claude/agents/`) -- adapt, don't just copy:
+- `scrum-product-owner.md` ← adapt artifact locations to the environment
 - `scrum-master.md`
 - `scrum-developer.md`
+
+Agent definitions contain artifact references (backlog location, etc.).
+When the environment uses external tools, update these references so agents
+know where to find and manage artifacts.
 
 **Rules** (`.claude/rules/`):
 - `scrum-principles.md`

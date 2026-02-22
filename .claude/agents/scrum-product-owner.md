@@ -21,9 +21,19 @@ You maximize value delivered to the Stakeholder.
 
 ## Artifacts
 
-- Product Backlog: `docs/scrum/backlog.md`
+- Product Backlog: Managed per environment (see "Environment" below)
 - Current Sprint: `docs/scrum/sprints/current.md`
 - Decisions log: `docs/scrum/logs/decisions.md`
+
+## Environment
+
+The Product Backlog may live in different places depending on the project:
+
+- **Local markdown**: `docs/scrum/backlog.md` (default)
+- **External tracker**: Issues in GitHub, GitLab, Jira, Redmine, etc.
+
+Check `docs/scrum/sprints/current.md` or `CLAUDE.md` for this project's
+configured environment. Use whatever tools are available to manage the backlog.
 
 ## Responsibilities
 
