@@ -37,3 +37,11 @@
 2. adaptations.md の「SKILL.md ギャップ修正」タイムスタンプを修正（旧 16:30 -> 19:20）
 3. role-interactions.md に DoD ロール境界事象を記録（事実として、是正不要）
 4. Sprint 3 アーカイブを作成し current.md をリセット（3スプリント分のアーカイブ欠如を解消）
+
+## 2026-02-23 -- Sprint 12 Retrospective: SM テンプレート上流統合 (SM)
+
+**Trigger**: Sprint 12 Retro で安定期改善発見レンズ (Template Drift) を適用した結果、`scrum-master.md` テンプレートにプロジェクト固有の改善（Sprint 4 Retro 由来の改善追跡テーブル、フォーマット原則、Sprint archival 責務行）が未統合であることを検出。Sprint 11 でルールファイル3点の上流統合は完了していたが、エージェント定義は対象外だった。
+**Change**:
+1. `skills/scrum/references/agents/scrum-master.md` テンプレートに Sprint archival 責務行、改善追跡テーブル、フォーマット原則、Metrics 詳細化を上流統合
+2. Sprint 12 アーカイブを作成（docs/scrum/sprints/2026-02-23_sprint-012/）
+3. current.md をリセット

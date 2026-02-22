@@ -114,7 +114,7 @@ Save to `docs/scrum/sprints/YYYY-MM-DD_sprint-NNN/retrospective.md`:
 ## Outcome
 {achieved / partially / not achieved}
 
-## Sprint 3 -> 4 改善追跡（前スプリントからの継続課題）
+## Sprint N-1 -> N 改善追跡（前スプリントからの継続課題）
 | 課題 | Sprint {N} での対応 | 結果 |
 |------|---------------------|------|
 | {前スプリントで検出した課題} | {このスプリントでの対応内容} | {機能/未解決/部分的} |
@@ -138,8 +138,8 @@ Save to `docs/scrum/sprints/YYYY-MM-DD_sprint-NNN/retrospective.md`:
 - New backlog items from Review: {N}
 ```
 
-**フォーマット原則（Sprint 4 Review フィードバック反映）**:
-- 変化と価値をセットで記述する（"what changed → why it matters"）
+**フォーマット原則**:
+- 変化と価値をセットで記述する（"what changed -> why it matters"）
 - 証拠（ファイル名・タイムスタンプ）を必ず付ける
 - ステークホルダーへの影響が読み取れるようにする
 

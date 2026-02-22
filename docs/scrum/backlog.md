@@ -13,21 +13,6 @@
 
 <!-- Ordered by value (highest first). PO agent maintains this file. -->
 
-### [P25] `/scrum update` のカスタマイズ保持検証
-
-**As** a stakeholder, **I want** `/scrum update` 実行後にプロジェクト固有のルールカスタマイズが保持されていることが検証されている, **so that** スキル更新時に過去の改善成果が失われるリスクを排除できる。
-
-**Acceptance Criteria:**
-- [ ] `/scrum update` を実行し、`.claude/rules/scrum-*.md` の3ファイルでプロジェクト固有のカスタマイズ（Sprint Rules, Courage 追加行, This Project's Adaptations）が保持されていることを確認
-- [ ] 更新前後の diff が記録されている（カスタマイズ保持の証跡）
-- [ ] Sprint 11 Retro で追加した SKILL.md の上流統合フロー注記が機能していることを確認
-
-**Notes:** Sprint 11 で `/scrum update` 実行時に scrum-principles.md, scrum-values.md, scrum-role-separation.md の3ファイルからプロジェクト固有の改善が削除された（failures.md 参照）。Retro でテンプレートへの上流統合とポリシー注記追加が行われたが、対策が本当に機能するかの実証検証は未実施。再発防止の最終確認。
-
-**Dependencies:** なし（独立して着手可能）
-
----
-
 ### [P22] Heartbeat パターンの調査・検討
 
 **As** a stakeholder, **I want** OpenClaw 等で検討されている heartbeat パターンがこのスキルに適用可能か調査されている, **so that** 定期的な自動検査やプロセス駆動の新しいアプローチを必要に応じて取り入れられる。
@@ -44,43 +29,26 @@
 
 ---
 
-### [P26] レトロスペクティブ品質の安定化ガイドライン
+### [P28] エージェント定義テンプレートの上流統合（Developer/PO）
 
-**As** a stakeholder, **I want** プロセスが安定している時期でもレトロスペクティブが改善の種を見つけ続ける, **so that** 「特に問題なし」で終わる形骸的なレトロが発生せず、継続的改善の文化が維持される。
+**As** a stakeholder, **I want** Developer と PO エージェント定義のプロジェクト固有改善がテンプレートに上流統合されている, **so that** `/scrum update` 実行時にこれらの改善が新規プロジェクトにも適用され、テンプレートとプロジェクト間の乖離が蓄積しない。
 
 **Acceptance Criteria:**
-- [ ] SM エージェント定義に「安定期でも最低1つの改善提案を出す」ガイドラインが追加されている
-- [ ] sprint-retrospective.md に、安定期の改善発見を支援する視点（例: 効率改善、ドキュメント品質、プロセスの摩擦、エージェント間連携の質）が記載されている
-- [ ] 過去のレトロ品質差（Sprint 8-10 が簡素 vs Sprint 3-4 が充実）の分析が Sprint ログに記録されている
+- [ ] Developer テンプレート (`references/agents/scrum-developer.md`) にプロジェクト側の Scrum Values セクションが統合されている
+- [ ] PO テンプレート (`references/agents/scrum-product-owner.md`) にプロジェクト側の Environment セクションが統合されている（汎用化した形で）
+- [ ] 統合後、プロジェクトエージェント定義とテンプレートの diff が「プロジェクト固有の具体例のみ」になっている
 
-**Notes:** Sprint 11 Retro の「What To Improve」で指摘。Sprint 8-10 の retrospective.md は「What To Improve: 特になし」のみで、改善の機会を逃している可能性がある。Scrum の「適応」の柱を強化するアイテム。
+**Notes:** Sprint 12 Retro で Template Drift レンズにより検出。SM テンプレートは Sprint 12 で統合済み。Developer/PO が残存。
 
 **Dependencies:** なし（独立して着手可能）
-
----
-
-### [P27] Sprint 中リアルタイム問題検出の改善
-
-**As** a stakeholder, **I want** Sprint 中に発生した問題がリアルタイムで failures.md/adaptations.md に記録される, **so that** Sprint Review/Retro まで問題が検出されないブラインドスポットが解消される。
-
-**Acceptance Criteria:**
-- [ ] Developer エージェント定義に「問題発生時の即時記録」手順が明記されている（現在の DoD 自己検査に加えて）
-- [ ] Daily Scrum セレモニー定義に「前回 Daily 以降の failures/adaptations 記録の確認」ステップが追加されている
-- [ ] Sprint 11 のルールファイル削除問題のように、Sprint 中に発生した問題が Review まで放置されるパターンを構造的に防止する仕組みになっている
-
-**Notes:** Sprint 11 で `/scrum update` によるルールファイル破損が Sprint 中に発生していたが、Sprint Review/Retro まで検出されなかった。P19 で追加した検査チェックポイントは Sprint 11 自体には適用されなかった（定義と実行が同一 Sprint）。次 Sprint 以降で P19 の仕組みが機能するかの実証を兼ねる。
-
-**Dependencies:** なし（独立して着手可能。P19 の仕組みが既に存在するため、それを補完する位置づけ）
 
 ---
 
 ## Item Dependency Map
 
 ```
-P25 (update カスタマイズ保持検証) ← 独立（Sprint 11 Retro 対策の最終確認）
 P22 (Heartbeat 調査) ← 独立（P19 完了済みでリサーチ材料が揃っている）
-P26 (レトロ品質安定化) ← 独立
-P27 (リアルタイム問題検出) ← 独立（P19 を補完）
+P28 (Dev/PO テンプレート上流統合) ← 独立（Sprint 12 Retro で検出）
 ```
 
 全アイテムは独立して着手・デリバリー・検査可能。
@@ -112,3 +80,6 @@ P27 (リアルタイム問題検出) ← 独立（P19 を補完）
 ### [P21] バックログアイテム独立性のガイドライン -- DONE (Sprint 11)
 ### [P23] `/scrum update` CLAUDE.md 動作検証 -- DONE (Sprint 11)
 ### [P24] バージョンバンプ運用の確立 -- DONE (Sprint 11)
+### [P25] `/scrum update` カスタマイズ保持検証 -- DONE (Sprint 12)
+### [P26] レトロスペクティブ品質の安定化ガイドライン -- DONE (Sprint 12)
+### [P27] Sprint 中リアルタイム問題検出の改善 -- DONE (Sprint 12)
