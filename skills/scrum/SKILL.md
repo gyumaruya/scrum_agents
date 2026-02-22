@@ -175,6 +175,7 @@ Read reference files from `references/` and **adapt** them to the project:
 - `logs/failures.md` ← empty with header
 - `logs/decisions.md` ← empty with header
 - `logs/adaptations.md` ← empty with header
+- `logs/role-interactions.md` ← cross-role handoff log (from `references/templates/role-interactions.md`)
 
 If no external issue tracker: also create `backlog.md` from template.
 
@@ -190,6 +191,7 @@ know where to find and manage artifacts.
 **Rules** (`.claude/rules/`):
 - `scrum-principles.md`
 - `scrum-values.md`
+- `scrum-role-separation.md`
 
 ### Step 3: Configure Environment Mapping
 

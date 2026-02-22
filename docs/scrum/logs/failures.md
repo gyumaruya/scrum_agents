@@ -18,3 +18,14 @@ Sprint 1 Item 2 の作業で `skills/scrum/references/agents/scrum-product-owner
 
 **根本原因**: done判定時に `git status` で未コミット変更を確認していなかった。
 **解決**: DoDに「全変更がコミット済み」チェック項目を追加。
+
+## 2026-02-22 19:15 - SKILL.md セットアップ手順に3つの漏れ
+
+/scrum 初回実行をシミュレートした結果、SKILL.md の Step 2 に以下の漏れを発見:
+
+1. **role-interactions.md が作成リストに未記載**: エージェント定義で `docs/scrum/logs/role-interactions.md` への記録を指示しているが、セットアップ手順の作成ファイルリストに含まれていない。テンプレートは `references/templates/role-interactions.md` に存在する。
+2. **scrum-role-separation.md ルールが未記載**: `references/rules/` には `scrum-role-separation.md` があるが、Step 2 では `.claude/rules/` にコピーするルールとして `scrum-principles.md` と `scrum-values.md` の2つしか記載されていない。
+3. **DoD テック環境適応の手順が曖昧**: テンプレートに `{Adapt to project: ...}` プレースホルダーがあるが、各テック環境での具体的な置換例が SKILL.md に不足している。
+
+**根本原因**: SKILL.md 作成時に references/ 内の全ファイルとの整合性チェックが不十分だった。
+**解決**: テスト用プロジェクトではギャップ1,2を手動で追加して解消。ギャップ3はSKILL.md自体の改善が必要（SM領域の作業）。

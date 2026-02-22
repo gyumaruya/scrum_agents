@@ -1,5 +1,13 @@
 # Daily Scrum
 
+## Role Assignment
+
+| Phase | Executor | Reviewer | Handoff |
+|-------|----------|----------|---------|
+| Progress Report | **Dev** | -- | Status to SM |
+| Goal Inspection | **SM** | -- | Adaptation decisions |
+| Scope Adjustment | **PO** (if needed) | -- | Updated priorities |
+
 ## When (Auto-trigger)
 
 - Mid-sprint, when checking progress is useful
@@ -11,25 +19,28 @@ Auto-trigger when the Developer agent completes an item or hits a blocker.
 
 ## Process
 
-### 1. Read State
+### 1. Read State (Dev)
 
-Read `docs/scrum/sprints/current.md`:
-- Sprint Goal
+Developer reports current status:
+- Sprint Goal progress
 - Item statuses
-- Blockers
+- Blockers encountered
 
-### 2. Inspect
+### 2. Inspect (SM)
 
+Scrum Master inspects process:
 - Is the Sprint Goal still achievable?
 - Are any items blocked?
-- Should work be reordered?
+- Is the process working well?
+
+Record inspection in `docs/scrum/logs/role-interactions.md`.
 
 ### 3. Adapt
 
 If problems detected:
-- Reorder work
-- Drop items to protect Sprint Goal (reduce scope, keep goal)
-- Log adaptation in `docs/scrum/logs/adaptations.md`
+- Dev reorders technical work
+- PO adjusts scope if needed (reduce scope, keep goal)
+- SM logs adaptation in `docs/scrum/logs/adaptations.md`
 
 ### 4. Update
 

@@ -1,5 +1,16 @@
 # Sprint Retrospective
 
+## Role Assignment
+
+| Phase | Executor | Reviewer | Handoff |
+|-------|----------|----------|---------|
+| Data Gathering | **SM** | -- | Analysis data collected |
+| Process Analysis | **SM** | -- | Insights generated |
+| Dev Process Review | **SM** | Dev (verify observations) | Dev confirms/corrects SM's observations |
+| PO Process Review | **SM** | PO (verify observations) | PO confirms/corrects SM's observations |
+| Improvement Action | **SM** | -- | Organizational files changed |
+| Archival | **SM** | -- | Sprint archived |
+
 ## When (Auto-trigger)
 
 - After Sprint Review completes
@@ -10,10 +21,11 @@
 
 ### 1. Gather Data
 
-Spawn `scrum-master` agent. It reads:
+Spawn `scrum-master` agent. SM independently reads:
 - `docs/scrum/sprints/current.md` (planned vs done)
 - `docs/scrum/logs/failures.md` (what went wrong)
 - `docs/scrum/logs/adaptations.md` (mid-sprint changes)
+- `docs/scrum/logs/role-interactions.md` (cross-role collaboration quality)
 - Recent change history (VCS log)
 - `.claude/agents/scrum-*.md` (did agents work well?)
 - `.claude/rules/scrum-*.md` (were rules helpful?)
@@ -25,8 +37,18 @@ SM agent identifies with specific evidence:
 - What went well (keep doing)
 - What to improve (stop or change)
 - Surprises (unexpected)
+- Role separation effectiveness (did boundaries hold?)
 
-### 3. Make ONE Concrete Change
+### 3. Cross-Role Verification
+
+SM shares observations with Dev and PO for verification:
+- Dev confirms/corrects SM's observations about implementation process
+- PO confirms/corrects SM's observations about value delivery
+
+**This ensures SM's analysis is objective and accurate.**
+Record verifications in `docs/scrum/logs/role-interactions.md`.
+
+### 4. Make ONE Concrete Change
 
 Pick the most impactful improvement. Actually edit the file:
 
@@ -39,7 +61,7 @@ Pick the most impactful improvement. Actually edit the file:
 
 **Every change must cite evidence from this sprint.**
 
-### 4. Archive Sprint
+### 5. Archive Sprint
 
 Create `docs/scrum/sprints/YYYY-MM-DD_sprint-NNN/` and save:
 - `plan.md` -- Sprint Goal, selected items, approach
@@ -47,11 +69,11 @@ Create `docs/scrum/sprints/YYYY-MM-DD_sprint-NNN/` and save:
 - `review.md` -- Review outcome and stakeholder feedback
 - `retrospective.md` -- This retrospective's findings and changes
 
-### 5. Reset Current Sprint
+### 6. Reset Current Sprint
 
 Clear `docs/scrum/sprints/current.md` for next sprint.
 
-### 6. Commit
+### 7. Commit
 
 Commit all changes from this sprint (Scrum records, organizational improvements):
 

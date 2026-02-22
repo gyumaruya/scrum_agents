@@ -20,11 +20,15 @@ An Increment is "Done" when ALL criteria are met:
 - [ ] All changes staged and committed (no uncommitted files at done)
 - [ ] PR updated or created for stakeholder review
 - [ ] Sprint log updated with what was done and why
+- [ ] Sprint 中に発生した失敗がfailures.mdに記録されている
+- [ ] Sprint 中の適応がadaptations.mdに記録されている
 
 ## Scrum
 
 - [ ] Acceptance criteria from backlog item are met
 - [ ] Increment is usable (not half-finished)
+- [ ] current.md の Item Status が PO Review 判定と一致している（approved / needs-revision）
+- [ ] role-interactions.md に PO Review の履歴（Review Result, Notes）が記録されている
 
 ---
 

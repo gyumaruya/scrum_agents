@@ -1,1 +1,22 @@
 __pycache__/
+*.pyc
+.env
+.env.*
+
+# Claude Code local files
+.claude/agent-memory/
+.claude/.pr-status
+
+# Local-only config (contains personal info)
+.local/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Root SKILL.md (auto-generated template, not part of package)
+/SKILL.md

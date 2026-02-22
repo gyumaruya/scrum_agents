@@ -1,3 +1,58 @@
 # Decision Log
 
 <!-- Append entries with ## YYYY-MM-DD - {decision} -->
+
+## 2026-02-22 - ロール分離を最優先アイテム（P1）に設定
+
+**Context**: ステークホルダーから「一人でやり切ってしまう問題がある。別のロール・別のエージェントが客観的にレビューや指摘をすることが重要」と要望があった。Sprint 1レトロでも「全ロールを1人で兼任したため、役割分離の検証ができていない」と課題が記録されている。
+
+**Decision**: 「ロール分離の強制と客観的レビューの実現」を新規アイテムとしてP1に設定。既存アイテムの優先順位を1つずつ下げた（旧P1→P2、旧P2→P3、旧P3→P4、旧P4→P5、旧P5→P6）。
+
+**Rationale**: ロール分離はScrumの「検査」の前提条件であり、これが欠けるとScrumプロセス全体が形骨化する。既存のP1（プロセス動作）やP3（エージェント定義）と関連するが、「強制メカニズム」と「客観的レビューフロー」は独立した課題であり、単独アイテムとすべき。Sprint 1の具体的エビデンスとステークホルダーの明確な要望の両方に裏付けられた優先判断である。
+
+## 2026-02-22 - ロール分離をルールベース（技術的強制ではなく指示ベース）で実装
+
+**Context**: Sprint 2でロール分離を実装するにあたり、2つのアプローチを検討した。(A) Pythonスクリプト/hookによる技術的な強制（兼任検出でブロック）、(B) エージェント定義・セレモニー定義・ルールファイルへの明示的な指示によるルールベースの分離。
+
+**Decision**: (B) ルールベースの分離を採用する。
+
+**Rationale**:
+1. Claude Codeのエージェント機構では、Task toolでspawnされたサブエージェントが`.claude/agents/`の定義を読み込む。定義に明確なロール境界を書けば、spawn時に自動的に遵守される。
+2. Scrumガイド自体が「自己管理チーム」を前提としており、ルールによる自制はScrumの精神に合致する。
+3. Pythonスクリプトの新規作成はこのスキルパッケージの依存を増やし、ツール非依存の設計原則に反する。
+4. ルールベースで不十分と判明した場合、Sprint 3以降で技術的強制に昇格させるオプションを残す。
+
+## 2026-02-22 - セレモニー自動連鎖のうち「アーカイブ連鎖」を次スプリントに繰り越し
+
+**Context**: Sprint 3 Review で、セレモニー自動連鎖の AC を検査した。定義ファイルには Auto-trigger/Auto-next が記載されているが、3スプリント経過しても Sprint アーカイブ（`docs/scrum/sprints/YYYY-MM-DD_sprint-NNN/`）が1つも作成されていない。Retro -> Archive -> Reset -> 次 Sprint の連鎖が実動作していない。
+
+**Decision**: この AC を needs-revision とし、次スプリントのバックログに繰り越す。ロール分離の dogfooding（Sprint 3 主目的）は approved として切り離す。
+
+**Rationale**: ロール分離の検証と自動連鎖の実動作は独立した価値であり、前者が達成されたことでスプリント全体を却下する理由はない。一方、3スプリント分のアーカイブが未作成という事実は透明性の観点から看過できず、次スプリントで確実に対応すべき。
+
+## 2026-02-22 - DoD に「PO Review 整合性チェック」を追加
+
+**Context**: Sprint 3 Retrospective の PO クロスロール検証で、SM 推奨「DoD に current.md と PO Review の整合性チェック追加」の検討
+
+**Decision**: 次の2項目を DoD「Scrum」セクションに追加する:
+1. `[ ] current.md の Item Status が PO Review 判定と一致している（approved / needs-revision）`
+2. `[ ] role-interactions.md に PO Review の履歴（Review Result, Notes）が記録されている`
+
+**Rationale**:
+- Sprint 2 で実際に発生した「PO needs-revision 判定が current.md に反映されていない」ケースを構造的に予防
+- PO Review の「透明性」（誰が、いつ、何を判定したのか）を可視化
+- done の定義が「実装の有無」から「受入検査の有無」にシフト。Scrumの本質（受け入れられるIncrementの生産）に整合
+
+## 2026-02-22 - Sprint 4 優先課題3点を確定
+
+**Context**: Sprint 3 終了時点の状況分析（SM Retrospective + PO Cross-role Verification）
+
+**Decision**: Sprint 4 では以下3点を優先課題として backlog に追加:
+1. **セレモニーアーカイブ連鎖の責務明確化** -- 誰が（Agent / PO / SM）、いつ、何をするのかを明記。現在「Auto-trigger / Auto-next」は定義されているが実行責務が曖昧。
+2. **Retro 後の自動アーカイブ手順の実装** -- Sprint 1-3 の archives を作成し、current.md をリセット。プロセスの「継続性」を実現。
+3. **DoD「PO Review 整合性チェック」の運用検証** -- 追加した2項目が実装時にどう機能するか検証。
+
+**Rationale**:
+- 改善ループ（Retro → Backlog → Sprint Goal）が機能していることは Sprint 3 で実証
+- 残存課題は「プロセスの完全性」（アーカイブ）と「検査の透明性」（PO Review 記録）
+- Sprint 4 で完結すれば、Sprint 1-4 を通じた「Scrum自己導入 → ロール分離 → dogfooding → プロセス完全性」の完全サイクルが達成される
