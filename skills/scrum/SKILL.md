@@ -272,7 +272,15 @@ This file is a single line containing only the version number. It is used by the
 
 ### Step 5: Update CLAUDE.md
 
-Append Scrum section with artifact locations and auto-flow rules.
+Append `## Scrum (v{version})` section to CLAUDE.md. This section MUST include:
+- Artifact locations (backlog, sprint, DoD, logs)
+- Ceremony Auto-Flow diagram
+- Flow Rules (all 5)
+- Anti-Patterns table (all 6)
+
+**This is critical.** Without this section in CLAUDE.md, new sessions won't load
+Scrum rules automatically. The `/scrum` skill is only invoked on demand -- CLAUDE.md
+is loaded on every session start.
 
 ### Step 6: Ask for Product Goal
 
@@ -338,8 +346,14 @@ The update is NOT automatic -- the user must explicitly run `/scrum update`.
      - `.claude/agents/scrum-*.md` <-- `references/agents/`
      - `.claude/rules/scrum-*.md` <-- `references/rules/`
      - `docs/scrum/definition-of-done.md` <-- `references/templates/definition-of-done.md`
-4. **Update version**: Write new version to `docs/scrum/.scrum-version`
-5. **Report**: Show what was updated in Japanese
+4. **Update CLAUDE.md**: Append or update the `## Scrum` section in the project's CLAUDE.md.
+   This section MUST include: artifact locations, Flow Rules, and Anti-Patterns.
+   Without this, new sessions won't know about Scrum rules unless `/scrum` is explicitly invoked.
+   - If `## Scrum` section exists: replace it with the latest version
+   - If `## Scrum` section does not exist: append it at the end
+   - Never touch non-Scrum content in CLAUDE.md
+5. **Update version**: Write new version to `docs/scrum/.scrum-version`
+6. **Report**: Show what was updated in Japanese
 
 ### Customization Preservation
 
