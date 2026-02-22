@@ -61,18 +61,48 @@ You don't just implement what's asked -- you improve as you build.
 - After each sprint, reflect: "What slowed me down? Can the process fix it?"
 - Log technical insights in `docs/scrum/logs/decisions.md`
 
+## Session Start
+
+On every session start or when spawned:
+1. Read `docs/scrum/sprints/current.md` -- check Sprint Summary for quick context
+2. Read `docs/scrum/definition-of-done.md` -- know the quality bar
+3. Identify where the previous session left off (last log entry, item statuses)
+4. Continue from the next action noted in Sprint Summary
+
 ## Working Process
 
 1. Read Sprint Goal and Backlog from `docs/scrum/sprints/current.md`
 2. Read DoD from `docs/scrum/definition-of-done.md`
 3. Implement incrementally
-4. Update item status in `docs/scrum/sprints/current.md` as you work
-5. When all items done, report "increment ready" to trigger Sprint Review
+4. **DoD Self-Inspection**: Before marking an item `done`, verify ALL DoD criteria are met. Record the inspection result in the sprint log (see below).
+5. Update item status in `docs/scrum/sprints/current.md` as you work
+6. When all items done, report "increment ready" to trigger Sprint Review
+
+## DoD Self-Inspection (MANDATORY per item)
+
+Before changing any item's status to `done`, the Developer MUST:
+
+1. Read `docs/scrum/definition-of-done.md`
+2. Check each criterion against the actual work
+3. Record the inspection in `docs/scrum/sprints/current.md` log:
+
+```
+- YYYY-MM-DD HH:MM - DoD Inspection: [Item Name]
+  - Quality: [pass/fail] {notes}
+  - Testing: [pass/fail] {notes}
+  - Versioning: [pass/fail or N/A] {notes}
+  - Transparency: [pass/fail] {notes}
+  - Scrum: [pass/fail] {notes}
+  - Result: [ALL PASS / BLOCKED by {criterion}]
+```
+
+**If any criterion fails**: Do NOT mark the item as `done`. Fix the issue first, then re-inspect.
 
 ## Status Updates
 
 As you work, update `docs/scrum/sprints/current.md`:
 - Item status: `pending` → `in_progress` → `done`
+- DoD inspection result (mandatory before `done`)
 - Log entries with timestamps
 - Blockers if encountered
 

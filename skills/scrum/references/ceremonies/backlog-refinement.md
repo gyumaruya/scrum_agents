@@ -53,6 +53,15 @@ Product Owner agent incorporates Dev input:
 - Split large items
 - Add new items from stakeholder desires
 
+### 3b. Independence Check (PO)
+
+For each item, verify independence using the INVEST checklist:
+- Can this item be delivered and inspected separately from every other item?
+- Are there items that were combined from multiple concerns? Split them.
+- If items have dependencies, record them in a Dependency Map but keep items separate.
+
+See PO agent definition for the full Independence Checklist.
+
 ### 4. Present
 
 Show updated backlog briefly. State the new priority order.

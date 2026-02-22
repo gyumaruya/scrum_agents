@@ -14,6 +14,17 @@ An Increment is "Done" when ALL criteria are met:
 - [ ] Skill loads correctly in Claude Code (YAML frontmatter valid)
 - [ ] Manual verification documented in sprint log
 
+## Versioning (MANDATORY for skill file changes)
+
+- [ ] SKILL.md `metadata.version` をバージョニングポリシーに従ってバンプ済み
+- [ ] `docs/scrum/.scrum-version` を一致させる（`/scrum update` または手動）
+- [ ] バージョンバンプの理由を sprint log または decisions.md に記録
+
+**バージョニングポリシー (SemVer):**
+- **Major** (X.0.0): 破壊的変更 -- ファイル構造変更、機能削除、セレモニーフロー非互換
+- **Minor** (x.Y.0): 新機能 -- セレモニーステップ追加、エージェント機能追加、テンプレート新セクション
+- **Patch** (x.y.Z): 修正 -- 文言改善、バグ修正、テンプレート微調整、クリーンアップ
+
 ## Delivery Verification (MANDATORY for skill file changes)
 
 - [ ] 変更を main にマージ済み
