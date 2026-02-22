@@ -12,7 +12,7 @@
 
 - Read `docs/scrum/sprints/current.md` for goal and completed items
 - Verify against `docs/scrum/definition-of-done.md`
-- Collect what was built (git diff summary, features, files changed)
+- Collect what was built (change summary, features delivered, files changed)
 
 ### 2. Present to Stakeholder
 

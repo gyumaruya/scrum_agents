@@ -7,8 +7,15 @@ AI エージェントが Scrum を自動実践し、ユーザーに価値を届�
 ```bash
 git clone git@github.com:gyumaruya/scrum_agents.git
 cd scrum_agents
-./install.sh
 ```
+
+Claude Code で `/scrum install` を実行:
+
+```
+/scrum install
+```
+
+グローバルスキルとして登録され、どのプロジェクトでも `/scrum` が使えるようになる。
 
 ## 使い方
 
@@ -24,19 +31,28 @@ cd scrum_agents
 
 ```
 ユーザー: "Xが欲しい"
-  → PO が自動でバックログ作成
+  → PO がバックログアイテム作成
   → Sprint Planning 自動実行
-  → Dev が実装開始
-  → インクリメント完成 → Sprint Review 自動実行
-  → ユーザーがフィードバック → Retrospective 自動実行
-  → 組織が改善される → 次のスプリントへ
+  → Dev が実装
+  → インクリメント完成 → Sprint Review
+  → ユーザーがフィードバック（非同期可）
+  → Retrospective 自動実行 → 組織が改善
+  → 次のスプリントへ
 ```
 
 ユーザーがやること:
 1. 欲しいものを伝える
-2. レビューでフィードバックする
+2. インクリメントをレビューし、フィードバックする
 
 それ以外は全て自動。
+
+### ツール非依存
+
+このスキルは **Scrum のプロセス** を定義する。特定のツールには依存しない。
+
+- Issue トラッカーがあれば活用する（GitHub, GitLab, Jira, Redmine 等）
+- なくても `docs/scrum/` のマークダウンファイルで全て運用可能
+- 導入時に環境を検出し、最適なワークフローを構成する
 
 ### 手動コマンド（必要な時だけ）
 
@@ -44,18 +60,19 @@ cd scrum_agents
 |---------|------|
 | `/scrum status` | 現在の状態確認 |
 | `/scrum plan` | 手動で Sprint Planning |
-| `/scrum retro` | 手動で Retrospective |
+| `/scrum daily` | Daily Scrum |
+| `/scrum review` | Sprint Review |
+| `/scrum retro` | Retrospective |
 | `/scrum refine` | バックログ整理 |
 
 ## ファイル構造（導入先プロジェクト）
 
 ```
 docs/scrum/
-  backlog.md                         Product Backlog
   definition-of-done.md              完了の定義
   sprints/
     current.md                       現在のスプリント
-    2026-02-22_sprint-001/           アーカイブ（日付+番号）
+    YYYY-MM-DD_sprint-NNN/           アーカイブ（日付+番号）
       plan.md
       log.md
       review.md
@@ -66,6 +83,8 @@ docs/scrum/
     adaptations.md                   適応ログ
 ```
 
+外部ツールがあればそれがバックログ。なければ `docs/scrum/backlog.md` を使用。
+
 ## 自己成長
 
 Retrospective で SM エージェントが組織ファイルを改善:
@@ -74,6 +93,9 @@ Retrospective で SM エージェントが組織ファイルを改善:
 
 ## アンインストール
 
-```bash
-rm ~/.claude/skills/scrum
 ```
+/scrum uninstall
+```
+
+グローバルスキルのシンボリックリンクを削除。
+プロジェクトの Scrum ファイルも削除するか確認される。

@@ -14,7 +14,7 @@ Spawn `scrum-master` agent. It reads:
 - `docs/scrum/sprints/current.md` (planned vs done)
 - `docs/scrum/logs/failures.md` (what went wrong)
 - `docs/scrum/logs/adaptations.md` (mid-sprint changes)
-- Recent git log
+- Recent change history (VCS log)
 - `.claude/agents/scrum-*.md` (did agents work well?)
 - `.claude/rules/scrum-*.md` (were rules helpful?)
 - `docs/scrum/definition-of-done.md` (was it followed?)
@@ -53,13 +53,16 @@ Clear `docs/scrum/sprints/current.md` for next sprint.
 
 ### 6. Commit
 
+Commit all changes from this sprint (Scrum records, organizational improvements):
+
 ```
-git add docs/scrum/ .claude/
-git commit -m "Sprint {N} 完了: {Sprint Goalの要約}
+Sprint {N} 完了: {Sprint Goalの要約}
 
 レトロスペクティブ: {改善内容}
-"
 ```
+
+Use the project's VCS to commit. Include Scrum records (`docs/scrum/`) and
+any organizational files changed (`.claude/agents/`, `.claude/rules/`, etc.).
 
 ## Output
 

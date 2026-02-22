@@ -1,0 +1,258 @@
+---
+name: scrum
+description: |
+  Scrum framework for AI agent self-management. Brings Scrum practices into
+  any project to drive development and continuous improvement.
+  Ceremonies chain automatically. Tool-agnostic: works with any issue tracker,
+  VCS, or just local markdown files.
+  Triggers: "scrum", "sprint", "retrospective", "backlog", "レトロ", "計画", "振り返り"
+metadata:
+  short-description: Scrum framework for AI agents
+  argument-hint: "[install|uninstall|plan|daily|review|retro|refine|status]"
+---
+
+# Scrum Skill
+
+Scrum is the MEANS, not the GOAL. The goal is delivering value to users.
+
+Arguments: $ARGUMENTS
+
+## Argument Routing
+
+| Argument | Action |
+|----------|--------|
+| `install` | Install this skill globally (symlink to ~/.claude/skills/) |
+| `uninstall` | Remove global symlink + optionally clean project Scrum files |
+| (empty, first time) | Setup: introduce Scrum to this project |
+| (empty, already set up) | Show status + suggest next action |
+| `plan` | Sprint Planning → `references/ceremonies/sprint-planning.md` |
+| `daily` | Daily Scrum → `references/ceremonies/daily-scrum.md` |
+| `review` | Sprint Review → `references/ceremonies/sprint-review.md` |
+| `retro` | Retrospective → `references/ceremonies/sprint-retrospective.md` |
+| `refine` | Backlog Refinement → `references/ceremonies/backlog-refinement.md` |
+| `status` | Show current sprint status |
+
+**Detect first time**: Check if `docs/scrum/` directory exists in project root.
+
+---
+
+## Install / Uninstall
+
+### `/scrum install`
+
+Create a symlink so this skill is available globally:
+
+```bash
+# Detect this skill's directory (where this SKILL.md lives)
+SKILL_DIR="$(pwd)/skills/scrum"  # or wherever this file is located
+ln -s "$SKILL_DIR" ~/.claude/skills/scrum
+```
+
+If `~/.claude/skills/scrum` already exists, report it and skip.
+
+### `/scrum uninstall`
+
+```bash
+rm ~/.claude/skills/scrum
+```
+
+Optionally ask if project-level Scrum files should also be removed:
+- `docs/scrum/` directory
+- `.claude/agents/scrum-*.md`
+- `.claude/rules/scrum-*.md`
+- Scrum section in CLAUDE.md
+
+---
+
+## Tool Agnosticism
+
+**This skill defines Scrum process, NOT specific tools.**
+
+Scrum requires certain capabilities (backlog management, work tracking, increment review).
+HOW those capabilities are fulfilled depends on the project's environment.
+
+### Scrum Capabilities → Environment Mapping
+
+| Scrum Capability | What is Needed | Examples |
+|-----------------|----------------|----------|
+| Product Backlog | A place to list and prioritize work items | Issue tracker, `docs/scrum/backlog.md` |
+| Sprint Backlog | A way to mark items as "in this sprint" | Labels/tags, sprint board, `docs/scrum/sprints/current.md` |
+| Sprint Work | A way to develop and track changes | Branches + PRs/MRs, local commits |
+| Increment Review | A way to present work to stakeholder | PR/MR review, demo, deploy preview |
+| Feedback | A way for stakeholder to respond asynchronously | Comments on PR/MR/Issue, `docs/scrum/` notes |
+| Sprint Archive | A persistent record of each sprint | `docs/scrum/sprints/YYYY-MM-DD_sprint-NNN/` (always) |
+
+### Environment Detection (at setup)
+
+During setup, detect what's available:
+
+1. **VCS**: git? Other?
+2. **Remote platform**: Check for existing skills, MCPs, or CLIs (e.g., `gh`, `glab`, `bb`)
+3. **Issue tracker**: Integrated with platform? Separate (Jira, Redmine)?
+4. **User preference**: Ask stakeholder if they have a preferred workflow
+
+### Adaptation Rules
+
+- **Always**: Use `docs/scrum/` for local Scrum records (sprint archives, logs, DoD). This is the source of truth for the Scrum process itself.
+- **If external tools are available**: Use them for backlog management, work tracking, and async communication. Map Scrum concepts to the platform's native features.
+- **If no external tools**: Use `docs/scrum/backlog.md` and `docs/scrum/sprints/current.md` as the full workflow. Everything works.
+- **If stakeholder specifies tools**: Adapt to their environment. Ask for guidance on how to use unfamiliar tools, or recommend they install appropriate skills/MCPs.
+
+### Recommending Tools (not requiring them)
+
+During setup, if no external tool is detected, suggest (not require):
+
+"バックログ管理や非同期フィードバックのために、プロジェクト管理ツールの導入を検討できます。
+例: GitHub Issues, GitLab Issues, Jira, Redmine など。
+対応するスキルや MCP があれば導入をお勧めします。
+なくても、マークダウンファイルで全て運用できます。"
+
+---
+
+## Automatic Ceremony Flow
+
+Ceremonies chain automatically. The user does NOT invoke each one.
+
+```
+User expresses desire
+  → PO: create backlog item automatically
+  → Sprint Planning: auto-start if no active sprint
+  → Dev: implement (branch + changes)
+  → Increment ready → Sprint Review (present to stakeholder)
+  → Stakeholder feedback → Retrospective auto-runs
+  → SM improves org → Next sprint
+```
+
+The user only needs to:
+- Express desires
+- Review increments and give feedback
+
+---
+
+## File Structure
+
+Local Scrum records (always created, regardless of tools):
+
+```
+docs/scrum/
+  definition-of-done.md                   # DoD (evolves through retros)
+  sprints/
+    current.md                            # Current sprint state
+    YYYY-MM-DD_sprint-NNN/                # Sprint archive
+      plan.md                             # Sprint Goal + items
+      log.md                              # Progress log
+      review.md                           # Review record
+      retrospective.md                    # Retro record
+  logs/
+    failures.md                           # Failure log
+    decisions.md                          # Design decisions
+    adaptations.md                        # Real-time adaptations
+```
+
+If external issue tracker is available, `docs/scrum/backlog.md` is optional.
+The external tracker IS the backlog. Local records track the Scrum process itself.
+
+---
+
+## Setup (First-Time `/scrum`)
+
+When `docs/scrum/` does NOT exist:
+
+### Step 1: Detect Environment
+
+- Tech stack (`pyproject.toml`, `package.json`, `Cargo.toml`, etc.)
+- VCS and remote platform (what tools/skills/MCPs are available?)
+- Existing CLAUDE.md and `docs/`
+- Ask stakeholder about preferred tools if unclear
+
+### Step 2: Create Local Structure
+
+Read reference files from `references/` and **adapt** them to the project:
+
+**Scrum records** (`docs/scrum/`):
+- `definition-of-done.md` ← adapt to detected tech stack (testing tools, quality checks)
+- `sprints/current.md` ← empty sprint template
+- `logs/failures.md` ← empty with header
+- `logs/decisions.md` ← empty with header
+- `logs/adaptations.md` ← empty with header
+
+If no external issue tracker: also create `backlog.md` from template.
+
+**Agents** (`.claude/agents/`) -- adapt, don't just copy:
+- `scrum-product-owner.md` ← adapt artifact locations to the environment
+- `scrum-master.md`
+- `scrum-developer.md`
+
+Agent definitions contain artifact references (backlog location, etc.).
+When the environment uses external tools, update these references so agents
+know where to find and manage artifacts.
+
+**Rules** (`.claude/rules/`):
+- `scrum-principles.md`
+- `scrum-values.md`
+
+### Step 3: Configure Environment Mapping
+
+Record detected tools and how Scrum concepts map to them in `docs/scrum/sprints/current.md`
+or CLAUDE.md. Example:
+
+```
+## Scrum Environment
+- Backlog: GitHub Issues (via `gh` CLI)
+- Sprint tracking: GitHub labels
+- Code review: Pull Requests
+```
+
+Or:
+
+```
+## Scrum Environment
+- Backlog: docs/scrum/backlog.md
+- Sprint tracking: docs/scrum/sprints/current.md
+- Code review: Direct stakeholder review
+```
+
+### Step 4: Update CLAUDE.md
+
+Append Scrum section with artifact locations and auto-flow rules.
+
+### Step 5: Ask for Product Goal
+
+"Scrum を導入しました。このプロジェクトで何を実現したいですか？"
+
+### Step 6: Auto-flow
+
+PO agent → create backlog → Sprint Planning → Dev starts.
+
+---
+
+## Status (`/scrum status`)
+
+1. Read `docs/scrum/sprints/current.md` for sprint state
+2. If external tracker available: query backlog and sprint items
+3. Count sprint archives in `docs/scrum/sprints/`
+4. Display in Japanese
+
+---
+
+## Sprint Archival
+
+After retrospective:
+
+1. Create `docs/scrum/sprints/YYYY-MM-DD_sprint-NNN/`
+2. Save: `plan.md`, `log.md`, `review.md`, `retrospective.md`
+3. Reset `docs/scrum/sprints/current.md`
+4. If external tracker: update item statuses (close completed items, etc.)
+5. Commit the archive
+
+---
+
+## Logging
+
+All events logged with timestamps in `docs/scrum/logs/`:
+
+| Log | Content | Format |
+|-----|---------|--------|
+| `failures.md` | Things that went wrong | `## YYYY-MM-DD HH:MM - {title}` |
+| `decisions.md` | Design/tech decisions | `## YYYY-MM-DD - {decision}` with Context/Decision/Rationale |
+| `adaptations.md` | Mid-sprint adaptations | `## YYYY-MM-DD HH:MM - {change}` with Trigger/Change |
