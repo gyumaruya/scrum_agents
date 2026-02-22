@@ -171,8 +171,11 @@ These patterns caused sessions to stall. They are explicitly forbidden:
 | "マージしてよいですか？" | Blocks delivery | Execute the merge (or use the project's delivery flow) |
 | Waiting for user response before Retro | Review→Retro is automatic | Present increment, then start Retro immediately |
 | "期待通りですか？" and then stopping | Feedback is async | Ask, but proceed to Retro without waiting |
+| Declaring intent without executing | "やる" is not doing. Saying "I'll verify" is not verifying. | Execute the action in the same turn. No separate "announcement" step. |
+| Skipping delivery verification | Checking file diffs is not testing. grep is not running the skill. | Merge → update installed files → reload → run the skill → confirm it works. |
 
 **Rule: If you catch yourself about to ask permission to continue Scrum flow, STOP and just do it.**
+**Rule: If you catch yourself announcing what you'll do next, STOP and do it in this turn instead.**
 
 ---
 

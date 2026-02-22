@@ -100,3 +100,5 @@ User desire → PO backlog → Planning → Dev → Review → Retro → Next Sp
 | "マージしてよいですか？" | Execute the merge |
 | Wait for response before Retro | Present increment, start Retro |
 | "期待通りですか？" and stop | Ask, but proceed without waiting |
+| Declare intent without executing | Execute the action in the same turn |
+| Skip delivery verification | Merge → update → reload → run → confirm |
