@@ -42,12 +42,9 @@ Spawn `scrum-product-owner` agent to independently review:
 **This is a cross-role review.** PO inspects Dev's work objectively.
 Record review result in `docs/scrum/logs/role-interactions.md`.
 
-### 3. Collaborate with Stakeholder (Working Session)
+### 3. Present to Stakeholder
 
-**This is NOT just a presentation.** The Sprint Review is a working session where the
-Scrum Team and stakeholders collaborate on what to do next.
-
-In Japanese, facilitate the session:
+In Japanese, present the increment:
 
 **What changed for you (ユーザーにとっての変化):**
 Explain in 2-3 sentences what the stakeholder can now do that they couldn't before,
@@ -58,11 +55,10 @@ or what got better for them. Focus on value, not implementation details.
 |------|--------|-----------------------|
 | {item} | {done/partial/not done} | {1-sentence user-facing impact} |
 
-**Collaborate:**
-- Ask: "この方向性で合っていますか？ 次に何を優先すべきですか？"
-- Discuss what could be done next to optimize value
-- Invite stakeholder to suggest backlog changes directly
-- The result of the Sprint Review is a revised Product Backlog
+**Next direction:**
+- State: "この方向性で進めます。次は {next items from backlog} に取り組みます。フィードバックがあればいつでもどうぞ。"
+- This is **non-blocking**. Do NOT wait for a response before proceeding.
+- If the stakeholder gives feedback, incorporate it in the next Backlog Refinement.
 
 **Details (for those who want them):**
 - Sprint Goal and whether it was achieved
@@ -70,7 +66,7 @@ or what got better for them. Focus on value, not implementation details.
 - What was NOT delivered and why (transparency)
 - PO's acceptance inspection result
 
-**Principle:** Lead with value, then collaborate on next steps. This is a dialogue, not a report.
+**Principle:** Lead with value, state the next direction, move on. Feedback is always welcome but never blocks.
 
 ### 4. Gather Feedback (Async)
 

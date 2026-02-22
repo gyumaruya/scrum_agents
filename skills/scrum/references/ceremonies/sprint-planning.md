@@ -29,7 +29,7 @@ Spawn `scrum-product-owner` agent:
 - Review `docs/scrum/backlog.md`
 - Consider stakeholder's desires
 - Propose a Sprint Goal (one clear sentence)
-- Present to stakeholder for confirmation (or auto-confirm if obvious)
+- Record the Sprint Goal in `current.md` and proceed (stakeholder may revise at Sprint Review)
 
 **Handoff:** PO passes Sprint Goal to Dev for feasibility assessment.
 Record in `docs/scrum/logs/role-interactions.md`.
