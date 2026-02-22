@@ -173,9 +173,11 @@ These patterns caused sessions to stall. They are explicitly forbidden:
 | "期待通りですか？" and then stopping | Feedback is async | Ask, but proceed to Retro without waiting |
 | Declaring intent without executing | "やる" is not doing. Saying "I'll verify" is not verifying. | Execute the action in the same turn. No separate "announcement" step. |
 | Skipping delivery verification | Checking file diffs is not testing. grep is not running the skill. | Merge → update installed files → reload → run the skill → confirm it works. |
+| Working without an active Sprint | All work happens inside a Sprint. No exceptions for "urgent" fixes. | Start Sprint Planning first, then work. Even a 1-item sprint is a sprint. |
 
 **Rule: If you catch yourself about to ask permission to continue Scrum flow, STOP and just do it.**
 **Rule: If you catch yourself announcing what you'll do next, STOP and do it in this turn instead.**
+**Rule: If there is no active Sprint and you are about to write code or make changes, STOP and start Sprint Planning first.**
 
 ---
 

@@ -102,3 +102,4 @@ User desire → PO backlog → Planning → Dev → Review → Retro → Next Sp
 | "期待通りですか？" and stop | Ask, but proceed without waiting |
 | Declare intent without executing | Execute the action in the same turn |
 | Skip delivery verification | Merge → update → reload → run → confirm |
+| Work without an active Sprint | Start Sprint Planning first. Even 1-item sprint is a sprint. |
