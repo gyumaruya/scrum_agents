@@ -39,8 +39,12 @@ An Increment is "Done" when ALL criteria are met:
 
 ## Transparency
 
-- [ ] Changes are documented (what and why)
-- [ ] Stakeholder can understand what was delivered
+- [ ] Changes committed to VCS with descriptive message
+- [ ] All changes staged and committed (no uncommitted files at done)
+- [ ] PR updated or created for stakeholder review
+- [ ] Sprint log updated with what was done and why
+- [ ] Failures during the Sprint are recorded in failures.md
+- [ ] Adaptations during the Sprint are recorded in adaptations.md
 
 ## Scrum
 
