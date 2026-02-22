@@ -20,6 +20,15 @@
 2. Sprint 4 アーカイブを SM として実動作で作成（docs/scrum/sprints/2026-02-23_sprint-004/）-- 3スプリント分のアーカイブ連鎖未実行問題を完全解消
 3. current.md をリセット（次 Sprint Planning の起動点を確立）
 
+## 2026-02-23 -- Sprint 11 Retrospective: ルールファイル上流統合フロー確立 (SM)
+
+**Trigger**: Sprint 11 で `/scrum update` 実行時に scrum-principles.md, scrum-values.md, scrum-role-separation.md の3ファイルからプロジェクト固有のカスタマイズが削除された。Sprint 5-7 で追加された改善がテンプレートに上流統合されていなかったことが根本原因。
+**Change**:
+1. テンプレート3ファイル（references/rules/scrum-*.md）に削除されたコンテンツを統合
+2. プロジェクトファイル（.claude/rules/scrum-*.md）を復元
+3. SKILL.md の Customization Preservation > Rules ポリシーに上流統合フローの注記を追加
+4. failures.md にインシデントを記録
+
 ## 2026-02-22 22:00 - Sprint 3 Retrospective 改善アクション (SM)
 
 **Trigger**: Sprint 3 Retro で以下3点を検出: (1) current.md Item 2 Status が PO Review 判定と不整合、(2) adaptations.md タイムスタンプ誤記、(3) DoD 変更が PO によって先行実施（SM 領域越境）

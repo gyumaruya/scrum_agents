@@ -93,4 +93,5 @@ This is a rule-based (not technical) enforcement. Each agent definition includes
 - Instruction to log boundary events
 
 If rule-based enforcement proves insufficient, escalate to technical enforcement
-(hooks, scripts) in a future sprint.
+(hooks, scripts) in a future sprint. Evidence of violations will be tracked in
+`docs/scrum/logs/role-interactions.md` and evaluated during retrospectives.

@@ -31,3 +31,5 @@ These are behavioral requirements, not aspirations.
 - Change organizational files when evidence demands it
 - Raise problems mid-sprint
 - Pivot when the approach isn't working
+- Proactively discover and address problems -- don't wait to be asked
+- Suggest improvements even when things seem to be working
