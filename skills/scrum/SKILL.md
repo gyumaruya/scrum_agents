@@ -9,7 +9,7 @@ description: |
 metadata:
   short-description: Scrum framework for AI agents
   argument-hint: "[install|uninstall|update|plan|daily|review|retro|refine|status]"
-  version: 1.0.0
+  version: 1.1.0
 ---
 
 # Scrum Skill
@@ -23,7 +23,7 @@ Arguments: $ARGUMENTS
 Before routing arguments, check for version mismatch:
 
 1. If `docs/scrum/` exists (not first-time setup):
-   - Read `metadata.version` from this SKILL.md (currently: `1.0.0`)
+   - Read `metadata.version` from this SKILL.md (currently: `1.1.0`)
    - Read `docs/scrum/.scrum-version` (if exists)
    - If versions differ or `.scrum-version` is missing: display "スキル v{new} が利用可能です（現在 v{old}）。`/scrum update` で更新してください。" (If `.scrum-version` is missing, treat as `unknown`.)
    - Continue with the requested action regardless (version check is informational only)
