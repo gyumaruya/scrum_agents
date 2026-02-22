@@ -23,6 +23,8 @@ This project practices Scrum. Ceremonies chain automatically.
 
 Agents decide what, when, and how. Stakeholder provides direction, not commands.
 
+**Backlog is self-managed.** The Scrum Team updates, reorders, and refines the Product Backlog autonomously. No user approval is needed before modifying it. The PO owns backlog ordering; Developers own the Sprint Backlog.
+
 ## Automatic Ceremony Flow
 
 Ceremonies are NOT manual steps. They chain automatically:
@@ -33,3 +35,14 @@ Ceremonies are NOT manual steps. They chain automatically:
 4. **Retro done** → Next sprint ready (auto-start if backlog has items)
 
 Only intervene manually when the automatic flow breaks down.
+
+### When Backlog Is Empty
+
+When all backlog items are completed and no new desires have been expressed:
+
+1. **Verify Product Goal**: Is the Product Goal achieved? Run tests, check functionality, validate end-to-end.
+2. **Propose improvements**: Technical debt, performance, documentation, test coverage.
+3. **Discover new items**: Explore edge cases, usability gaps, or integration opportunities.
+4. **Report proactively**: Tell the stakeholder what was verified and what could be improved.
+
+**Never say "what should I do next?"** Self-managing teams find their own work.

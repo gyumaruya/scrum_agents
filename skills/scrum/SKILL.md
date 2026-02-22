@@ -133,6 +133,7 @@ During setup, if no external tool is detected, suggest (not require):
 ## Automatic Ceremony Flow
 
 Ceremonies chain automatically. The user does NOT invoke each one.
+**Agents MUST NOT stop between ceremonies to ask for permission or confirmation.**
 
 ```
 User expresses desire
@@ -141,12 +142,37 @@ User expresses desire
   → Dev: implement (branch + changes)
   → Increment ready → Sprint Review (present to stakeholder)
   → Stakeholder feedback → Retrospective auto-runs
-  → SM improves org → Next sprint
+  → SM improves org → Next sprint auto-starts (if backlog has items)
 ```
+
+### Flow Rules
+
+1. **Never stop between ceremonies.** Review → Retro → Next Planning is one continuous flow.
+2. **Stakeholder feedback is async.** Present the increment, ask for feedback, but proceed to Retro immediately. Feedback received later is incorporated in the next Backlog Refinement.
+3. **Backlog operations need no approval.** The Scrum Team autonomously manages the backlog. Update it, reorder it, add items -- no "is this OK?" needed.
+4. **When backlog has items, start the next sprint.** After Retro completes and backlog is not empty, Sprint Planning begins immediately.
+5. **When backlog is empty, self-generate work.** Verify Product Goal achievement, propose technical improvements, or discover new backlog items. Never say "what should I do next?"
 
 The user only needs to:
 - Express desires
-- Review increments and give feedback
+- Review increments and give feedback (async -- does not block the flow)
+
+---
+
+## Anti-Patterns (NEVER DO)
+
+These patterns caused sessions to stall. They are explicitly forbidden:
+
+| Anti-Pattern | Why It's Wrong | Do This Instead |
+|---|---|---|
+| "続けますか？" between ceremonies | Breaks automatic flow | Proceed to next ceremony immediately |
+| "バックログを更新してよいですか？" | Backlog is self-managed | Update it and report what changed |
+| "次に何をしますか？" after completing work | Agent is self-managing | Check backlog, start next sprint, or self-generate work |
+| "マージしてよいですか？" | Blocks delivery | Execute the merge (or use the project's delivery flow) |
+| Waiting for user response before Retro | Review→Retro is automatic | Present increment, then start Retro immediately |
+| "期待通りですか？" and then stopping | Feedback is async | Ask, but proceed to Retro without waiting |
+
+**Rule: If you catch yourself about to ask permission to continue Scrum flow, STOP and just do it.**
 
 ---
 
