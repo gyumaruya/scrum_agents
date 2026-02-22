@@ -13,42 +13,42 @@
 
 <!-- Ordered by value (highest first). PO agent maintains this file. -->
 
-### [P22] Heartbeat パターンの調査・検討
+### [P29] v1.3.1 フレッシュプロジェクト E2E 検証
 
-**As** a stakeholder, **I want** OpenClaw 等で検討されている heartbeat パターンがこのスキルに適用可能か調査されている, **so that** 定期的な自動検査やプロセス駆動の新しいアプローチを必要に応じて取り入れられる。
+**As** a stakeholder, **I want** 最新版スキル (v1.3.1) が新規プロジェクトで正しく動作することが検証されている, **so that** パッケージの配布品質に自信を持てる。
 
 **Acceptance Criteria:**
-- [ ] Heartbeat パターンの概要と主要な実装例が `docs/scrum/logs/decisions.md` にリサーチ結果として記録されている
-- [ ] P19（検査チェックポイント）の結果を踏まえ、heartbeat が「検査の自動トリガー」として Scrum スキルに付加価値を持つかが評価されている
-- [ ] Scrum スキルへの適用可能性が評価されている（適用する/しない/別スキルにする、の判断と根拠）
-- [ ] 適用する場合の具体的な設計案がある、または別スキルとして分離する理由が記録されている
+- [ ] 一時ディレクトリで新規プロジェクトを作成し、`/scrum install` でスキルをインストール
+- [ ] `/scrum` (初回セットアップ) が正しくファイル構造を生成する（docs/scrum/, .claude/agents/, .claude/rules/）
+- [ ] 生成されたファイルに Sprint 11-13 の改善が反映されている（DoD Versioning セクション、Developer の Real-Time Problem Recording、SM の Retrospective Quality、PO の Environment セクション等）
+- [ ] `/scrum update` が正しくバージョン管理を行う（.scrum-version の作成・更新）
 
-**Notes:** ステークホルダーは「これ自体はこのプロジェクトで実装するというよりは別スキルかもしれない」と言及。リサーチ・調査アイテムとして扱い、実装判断はリサーチ結果に基づいて行う。P19（検査チェックポイント）が Sprint 11 で完了しており、Daily Scrum と Sprint Review に構造化された検査ステップが導入済み。heartbeat がこれらに追加の価値を持つかどうかがリサーチの焦点になる。
+**Notes:** 前回の E2E テストは Sprint 9 (P16)。v1.0.0 時点。以降 13 のアイテムが完了し v1.3.1 に到達。最終品質確認として実施。
 
-**Dependencies:** P19 完了済み -- リサーチの判断材料が揃っている。独立して着手可能。
+**Dependencies:** なし
 
 ---
 
-### [P28] エージェント定義テンプレートの上流統合（Developer/PO）
+### [P30] SKILL.md 正確性監査
 
-**As** a stakeholder, **I want** Developer と PO エージェント定義のプロジェクト固有改善がテンプレートに上流統合されている, **so that** `/scrum update` 実行時にこれらの改善が新規プロジェクトにも適用され、テンプレートとプロジェクト間の乖離が蓄積しない。
+**As** a stakeholder, **I want** SKILL.md が現在の全機能を正確に記述している, **so that** スキルの主要定義ファイルが信頼できるドキュメントとして機能する。
 
 **Acceptance Criteria:**
-- [ ] Developer テンプレート (`references/agents/scrum-developer.md`) にプロジェクト側の Scrum Values セクションが統合されている
-- [ ] PO テンプレート (`references/agents/scrum-product-owner.md`) にプロジェクト側の Environment セクションが統合されている（汎用化した形で）
-- [ ] 統合後、プロジェクトエージェント定義とテンプレートの diff が「プロジェクト固有の具体例のみ」になっている
+- [ ] SKILL.md の各セクション（Version Check, Setup, Update, Session Continuity, Anti-Patterns）が実際の動作と一致していることを確認
+- [ ] Sprint 11-13 で追加された機能（Session Continuity, Customization Preservation の upstream 注記等）が SKILL.md に正確に記述されている
+- [ ] 不正確・古い記述があれば修正されている
 
-**Notes:** Sprint 12 Retro で Template Drift レンズにより検出。SM テンプレートは Sprint 12 で統合済み。Developer/PO が残存。
+**Notes:** SKILL.md は 465 行を超える大きなファイル。13 Sprint にわたる改善で段階的に拡張されてきたため、全体の整合性を確認する価値がある。
 
-**Dependencies:** なし（独立して着手可能）
+**Dependencies:** なし
 
 ---
 
 ## Item Dependency Map
 
 ```
-P22 (Heartbeat 調査) ← 独立（P19 完了済みでリサーチ材料が揃っている）
-P28 (Dev/PO テンプレート上流統合) ← 独立（Sprint 12 Retro で検出）
+P29 (E2E 検証) ← 独立
+P30 (SKILL.md 監査) ← 独立
 ```
 
 全アイテムは独立して着手・デリバリー・検査可能。
@@ -78,8 +78,10 @@ P28 (Dev/PO テンプレート上流統合) ← 独立（Sprint 12 Retro で検�
 ### [P19] Sprint 中の検査チェックポイントの強制 -- DONE (Sprint 11)
 ### [P20] セッション間コンテキスト継続性の確保 -- DONE (Sprint 11)
 ### [P21] バックログアイテム独立性のガイドライン -- DONE (Sprint 11)
+### [P22] Heartbeat パターンの調査・検討 -- DONE (Sprint 13)
 ### [P23] `/scrum update` CLAUDE.md 動作検証 -- DONE (Sprint 11)
 ### [P24] バージョンバンプ運用の確立 -- DONE (Sprint 11)
 ### [P25] `/scrum update` カスタマイズ保持検証 -- DONE (Sprint 12)
 ### [P26] レトロスペクティブ品質の安定化ガイドライン -- DONE (Sprint 12)
 ### [P27] Sprint 中リアルタイム問題検出の改善 -- DONE (Sprint 12)
+### [P28] エージェント定義テンプレート上流統合 -- DONE (Sprint 13)

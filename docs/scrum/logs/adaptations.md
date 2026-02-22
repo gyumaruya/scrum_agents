@@ -45,3 +45,11 @@
 1. `skills/scrum/references/agents/scrum-master.md` テンプレートに Sprint archival 責務行、改善追跡テーブル、フォーマット原則、Metrics 詳細化を上流統合
 2. Sprint 12 アーカイブを作成（docs/scrum/sprints/2026-02-23_sprint-012/）
 3. current.md をリセット
+
+## 2026-02-23 -- Sprint 13 Retrospective: DoD テンプレート Transparency セクション上流統合 (SM)
+
+**Trigger**: Sprint 13 Retro で安定期改善発見レンズ (DoD Evolution) を適用した結果、DoD テンプレートの Transparency セクション（2行の曖昧な表現）がプロジェクト側（6項目の具体的チェック項目、Sprint 2-3 由来）と大きく乖離していることを検出。Sprint 11-13 でエージェント定義とルールファイルの上流統合を完了していたが、DoD テンプレートは対象外だった。
+**Change**:
+1. `skills/scrum/references/templates/definition-of-done.md` の Transparency セクションを2行から6行に拡充（VCS コミット確認、全変更コミット確認、PR 作成/更新、Sprint ログ更新、failures.md 記録、adaptations.md 記録）
+2. Sprint 13 アーカイブを作成（docs/scrum/sprints/2026-02-23_sprint-013/）
+3. current.md をリセット
