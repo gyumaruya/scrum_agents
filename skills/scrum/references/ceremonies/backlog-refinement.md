@@ -1,5 +1,14 @@
 # Backlog Refinement
 
+## Role Assignment
+
+| Phase | Executor | Reviewer | Handoff |
+|-------|----------|----------|---------|
+| Backlog Review | **PO** | -- | Items identified for refinement |
+| Feasibility Input | **Dev** | -- | Technical insights → PO |
+| Refinement | **PO** | Dev (feasibility check) | Refined items |
+| Process Check | **SM** (optional) | -- | Confirms refinement quality |
+
 ## When
 
 - Between sprints
@@ -8,24 +17,36 @@
 
 ## Process
 
-### 1. Review
+### 1. Review (PO)
 
-Read `docs/scrum/backlog.md`.
+Spawn `scrum-product-owner` agent:
+- Read `docs/scrum/backlog.md`
+- Identify items needing refinement
 
-### 2. Refine
+### 2. Technical Input (Dev)
 
-Spawn `scrum-product-owner` agent to:
+Spawn `scrum-developer` agent to provide:
+- Feasibility assessment for top items
+- Technical risks and dependencies
+- Effort estimates (rough sizing)
+
+**Handoff:** Dev passes technical insights to PO.
+Record in `docs/scrum/logs/role-interactions.md`.
+
+### 3. Refine (PO)
+
+Product Owner agent incorporates Dev input:
 - Add detail to top items (acceptance criteria)
 - Remove stale items
 - Re-order by value
 - Split large items
 - Add new items from stakeholder desires
 
-### 3. Present
+### 4. Present
 
 Show updated backlog briefly. Ask if priorities are correct.
 
-### 4. Write
+### 5. Write
 
 Update `docs/scrum/backlog.md`.
 

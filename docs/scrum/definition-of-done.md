@@ -20,6 +20,8 @@ An Increment is "Done" when ALL criteria are met:
 - [ ] All changes staged and committed (no uncommitted files at done)
 - [ ] PR updated or created for stakeholder review
 - [ ] Sprint log updated with what was done and why
+- [ ] Sprint 中に発生した失敗がfailures.mdに記録されている
+- [ ] Sprint 中の適応がadaptations.mdに記録されている
 
 ## Scrum
 
