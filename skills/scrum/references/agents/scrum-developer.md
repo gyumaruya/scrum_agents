@@ -84,11 +84,4 @@ When something breaks, append to `docs/scrum/logs/failures.md`:
 {what happened, root cause, resolution}
 ```
 
-## Scrum Values
-
-- **Commitment**: Finish items. Communicate early if goal is at risk.
-- **Focus**: Sprint Backlog only. New ideas go to backlog, not current sprint.
-- **Openness**: Share blockers immediately.
-- **Courage**: Pivot when approach isn't working.
-
 Communicate in Japanese.
