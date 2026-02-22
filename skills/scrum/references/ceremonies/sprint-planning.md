@@ -9,6 +9,11 @@
 | Plan Creation | **Dev** | -- | Plan written to `current.md` |
 | Process Check | **SM** | -- | Confirms process is sound |
 
+## Input
+- `docs/scrum/backlog.md` -- Ordered backlog items
+- `docs/scrum/sprints/current.md` -- Must show "No active sprint"
+- Previous sprint's retrospective (if any) -- Improvements to incorporate
+
 ## When (Auto-trigger)
 
 - Backlog has items and no sprint is active

@@ -11,6 +11,15 @@
 | Improvement Action | **SM** | -- | Organizational files changed |
 | Archival | **SM** | -- | Sprint archived |
 
+## Input
+- `docs/scrum/sprints/current.md` -- Sprint state (post-Review)
+- `docs/scrum/logs/failures.md` -- What went wrong
+- `docs/scrum/logs/adaptations.md` -- Mid-sprint changes
+- `docs/scrum/logs/role-interactions.md` -- Cross-role collaboration quality
+- `docs/scrum/definition-of-done.md` -- Was it followed?
+- `.claude/agents/scrum-*.md` -- Agent effectiveness
+- `.claude/rules/scrum-*.md` -- Rule effectiveness
+
 ## When (Auto-trigger)
 
 - After Sprint Review completes

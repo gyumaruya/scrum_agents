@@ -9,6 +9,11 @@
 | Refinement | **PO** | Dev (feasibility check) | Refined items |
 | Process Check | **SM** (optional) | -- | Confirms refinement quality |
 
+## Input
+- `docs/scrum/backlog.md` -- Current backlog
+- Previous sprint retrospective -- Lessons learned
+- Stakeholder feedback -- New desires or changes
+
 ## When
 
 - Between sprints
@@ -52,4 +57,10 @@ Update `docs/scrum/backlog.md`.
 
 ## Output
 
-Updated backlog summary. Top 3 items ready for next sprint.
+Updated `docs/scrum/backlog.md` with:
+- Refined top items (clear AC, sized, ordered)
+- New items from stakeholder feedback
+- Stale items removed or deprioritized
+- Top 3 items ready for next sprint selection
+
+Brief summary in Japanese of what changed and why.

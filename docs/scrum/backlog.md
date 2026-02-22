@@ -11,93 +11,6 @@
 
 <!-- Ordered by value (highest first). PO agent maintains this file. -->
 
-### [P1] ロール分離の強制と客観的レビューの実現 -- DONE (Sprint 4 PO確認済み)
-
-**As** a stakeholder, **I want** PO/SM/Devが別々のエージェントとして動作し、
-あるロールの成果物を別のロールが客観的にレビュー・指摘できること, **so that**
-一人でやり切ってしまう問題が解消され、Scrumの「検査」が実際に機能する。
-
-**Acceptance Criteria:**
-- [x] 各ロール（PO/SM/Dev）が別エージェント（別セッションまたはサブエージェント）として起動される仕組みがある
-- [x] あるロールの成果物を別のロールがレビューするフローが定義されている（例: DevのIncrementをPOがReviewする、POのバックログをSMが検査する）
-- [x] 同一エージェントが複数ロールを兼任した場合に警告または防止する仕組みがある
-- [x] ロール間のやり取りが記録として残る（透明性）
-- [x] dogfoodingで実際にロール分離が機能することを検証済み
-
-**Notes:** Sprint 2でルールベース分離を構築、Sprint 3で3ロール別エージェントによるdogfooding検証完了。Sprint 3 role-interactions.mdに7件以上のクロスロール記録あり。Sprint 4冒頭で最終確認しDoneクローズ予定。
-
-### [P2] スキルパッケージがScrumプロセスとして実際に動作する
-
-**As** a stakeholder, **I want** `/scrum` を任意のプロジェクトで実行したときに
-Scrumの導入からセレモニーの自動連鎖まで実際に機能すること, **so that**
-ユーザーは欲しいものを伝えるだけで開発が自動で進む。
-
-**Acceptance Criteria:**
-- [x] `/scrum` 初回実行でdocs/scrum/、エージェント、ルールが正しく作成される
-- [x] POエージェントがステークホルダーの要望をバックログアイテムに変換する
-- [ ] Sprint Planningが自動で始まり、Devが実装に入る
-- [ ] Retro完了後にアーカイブ作成の責務が明確に定義されている（誰が・いつ・何を）
-- [ ] Sprint完了時にcurrent.mdがリセットされ、次Sprint Planningの起動点が明確
-- [ ] 全てこのスキルパッケージ自身で検証済み（dogfooding）
-  - DoD PO Review整合性チェック新項目の動作確認を含む
-  - スキルテンプレートへの改善フィードバックを含む
-
-**Notes:** Sprint 1で基本ループ検証、Sprint 3でロール分離dogfooding完了。残作業はセレモニーアーカイブ連鎖の責務明確化と実動作。Sprint 3 Retro優先課題3点を統合済み。
-
-**Dev見積:** 責務明確化(S) + アーカイブ実動作(M) + DoD検証+テンプレートフィードバック(S) = 合計M
-
-**Dev技術メモ:**
-- sprint-retrospective.md Step 5/6にアーカイブ手順は存在するが実行責務（誰が）が未定義
-- SKILL.md「Sprint Archival」とセレモニー定義に微妙な食い違いあり（整合が必要）
-- DoD改善がプロジェクト固有のdefinition-of-done.mdにのみ反映、スキルテンプレートに未反映
-
-### [P3] セレモニー定義がスキルの実行者に十分な指示を与える
-
-**As** a stakeholder, **I want** ceremonies/ のリファレンスが曖昧さなく、
-エージェントが迷わずセレモニーを実行できること, **so that**
-自動連鎖が途切れない。
-
-**Acceptance Criteria:**
-- [ ] 各セレモニーのトリガー条件が明確
-- [ ] 各セレモニーの入力・出力が定義されている
-- [ ] 次のセレモニーへの連鎖条件が明記されている
-
-**Notes:** P2のセレモニー連鎖と重複部分が大きい。P2完結後に再評価。
-
-### [P4] エージェント定義が自律動作に十分な情報を持つ -- DONE (Sprint 4 PO確認済み)
-
-**As** a stakeholder, **I want** PO/SM/Devエージェントが自分の役割、使えるツール、
-判断基準を理解した上で自律的に動くこと, **so that** ユーザーが細かく指示しなくてよい。
-
-**Acceptance Criteria:**
-- [x] 各エージェントの判断基準が定義されている
-- [x] ツール非依存: 環境に応じて適切なツールを選択できる
-- [x] 役割の境界が明確（POはwhat/why、DevはHow、SMはprocess）
-
-**Notes:** Sprint 2-3でエージェント定義を整備、dogfooding確認済み。Sprint 4冒頭で最終確認しDoneクローズ予定。
-
-### [P5] インストール/アンインストールが確実に動作する
-
-**As** a stakeholder, **I want** `/scrum install` と `/scrum uninstall` が
-期待通りに動作すること, **so that** どのプロジェクトにも簡単に導入・撤去できる。
-
-**Acceptance Criteria:**
-- [ ] `/scrum install` でシンボリックリンクが作成される
-- [ ] `/scrum uninstall` でリンク削除 + オプションでプロジェクトファイル削除
-- [ ] 既にインストール済みの場合は適切に報告
-
-### [P6] Retrospectiveが実際に組織を改善する
-
-**As** a stakeholder, **I want** Retrospectiveの結果としてエージェント定義、ルール、DoDが
-具体的に改善されること, **so that** スプリントを重ねるほど組織が良くなる。
-
-**Acceptance Criteria:**
-- [x] SMエージェントがエビデンスに基づいて1つ以上のファイルを変更する
-- [x] 変更内容がadaptations.mdに記録される
-- [x] 変更がgit commitされて学習履歴になる
-
-**Notes:** Sprint 1-3で全AC達成の証跡あり。P2のアーカイブ連鎖が完結すればRetro→アーカイブ→次Sprintの完全連鎖も達成。DONEクローズ検討可。
-
 ### [P7] ユーザーへの報告をわかりやすくする
 
 **As** a stakeholder, **I want** Scrumの各セレモニーやステータス報告が、
@@ -110,7 +23,7 @@ Scrumの導入からセレモニーの自動連鎖まで実際に機能するこ
 - [ ] 図表だけに頼らず、意図が正確に伝わる文章も併記されている
 - [ ] `/scrum status` の出力がユーザー視点で理解しやすい形式になっている
 
-**Notes:** Sprint 4 Review でステークホルダーから「報告がわかりづらい」とフィードバック。内部AC達成状況の列挙ではなく、ユーザーが「何が良くなったのか」を理解できる報告形式が必要。
+**Notes:** Sprint 4 Review でステークホルダーから直接フィードバック。
 
 ### [P8] エージェントに意識・性格を持たせ、積極的に自己改善する振る舞いを実現する
 
@@ -125,7 +38,32 @@ Scrumの導入からセレモニーの自動連鎖まで実際に機能するこ
 - [ ] POがステークホルダーの暗黙の欲求を積極的に察知・提案する振る舞いが定義されている
 - [ ] Scrumフレームワーク自体がこれらの積極的行動を促進する仕組みになっている
 
-**Notes:** Sprint 4 Review でステークホルダーから「自己改善をするタイプであってほしい、積極的に行動してほしい」とフィードバック。現在のエージェント定義はロール境界の遵守に重点を置いているが、境界内での積極性・主体性の促進が不足。
+**Notes:** Sprint 4 Review でステークホルダーから直接フィードバック。
+
+### [P3] セレモニー定義がスキルの実行者に十分な指示を与える
+
+**As** a stakeholder, **I want** ceremonies/ のリファレンスが曖昧さなく、
+エージェントが迷わずセレモニーを実行できること, **so that**
+自動連鎖が途切れない。
+
+**Acceptance Criteria:**
+- [ ] 各セレモニーのトリガー条件が明確
+- [ ] 各セレモニーの入力・出力が定義されている
+- [ ] 次のセレモニーへの連鎖条件が明記されている
+
+**Notes:** Dev分析: トリガーとAuto-nextは全ファイルに既存。不足は「Input」セクションの明示化とbacklog-refinement.mdのOutput補強。見積S。
+
+### [P5] インストール/アンインストールが確実に動作する
+
+**As** a stakeholder, **I want** `/scrum install` と `/scrum uninstall` が
+期待通りに動作すること, **so that** どのプロジェクトにも簡単に導入・撤去できる。
+
+**Acceptance Criteria:**
+- [ ] `/scrum install` でシンボリックリンクが作成される
+- [ ] `/scrum uninstall` でリンク削除 + オプションでプロジェクトファイル削除
+- [ ] 既にインストール済みの場合は適切に報告
+
+**Notes:** Dev分析: SKILL.mdにドキュメントは存在。install.sh新規作成が必要。見積S。
 
 ### [P9] スキルアップデート機能（バージョン管理と自動整合）
 
@@ -140,4 +78,22 @@ Scrumの導入からセレモニーの自動連鎖まで実際に機能するこ
 - [ ] スキル呼び出し時にバージョン不一致を検出し、updateを推奨する仕組みがある
 - [ ] update時にプロジェクト固有のカスタマイズが保持される（上書きしない）
 
-**Notes:** Sprint 4 Review でステークホルダーから提案。スキルパッケージが進化した場合、既存プロジェクトの関連ファイルが古いまま残る問題を解決する。バージョン識別子による差分検出と、呼び出し時の自動チェックが有効。
+**Notes:** Dev分析: ゼロからの実装。SKILL.mdにversion追加、Argument Routingにupdate追加、カスタマイズ保持戦略の設計が必要。見積L。
+
+---
+
+## Done
+
+### [P1] ロール分離の強制と客観的レビューの実現 -- DONE (Sprint 4)
+### [P4] エージェント定義が自律動作に十分な情報を持つ -- DONE (Sprint 4)
+### [P2] スキルパッケージがScrumプロセスとして実際に動作する -- DONE (Sprint 5 Refinement)
+
+Sprint 4でアーカイブ連鎖の責務明確化・実動作が完了。全ACの証跡:
+- Sprint Planning自動開始: sprint-planning.md Auto-trigger + Step 6に明記
+- アーカイブ責務定義: sprint-retrospective.md Step 5/6にSM executor明記
+- current.mdリセット: Sprint 4で実動作（sprint-004アーカイブ作成済み）
+- dogfooding: Sprint 1-4の4スプリント運用で検証
+
+### [P6] Retrospectiveが実際に組織を改善する -- DONE (Sprint 5 Refinement)
+
+Sprint 1-4で全AC達成。Sprint 4 Retro でscrum-master.mdのRecord Format改善が直近の証跡。

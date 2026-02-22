@@ -40,27 +40,33 @@ Arguments: $ARGUMENTS
 
 ### `/scrum install`
 
-Create a symlink so this skill is available globally:
+Install this skill globally so `/scrum` works in any project:
 
+1. **Detect skill location**: Find the directory containing this SKILL.md
+2. **Check existing installation**: If `~/.claude/skills/scrum` already exists, report "Already installed" and show the current link target
+3. **Create symlink**: `ln -s {SKILL_DIR} ~/.claude/skills/scrum`
+4. **Verify**: Confirm the link was created successfully
+
+**Example:**
 ```bash
-# Detect this skill's directory (where this SKILL.md lives)
-SKILL_DIR="$(pwd)/skills/scrum"  # or wherever this file is located
-ln -s "$SKILL_DIR" ~/.claude/skills/scrum
+ln -s /path/to/scrum_agents/skills/scrum ~/.claude/skills/scrum
 ```
 
-If `~/.claude/skills/scrum` already exists, report it and skip.
+If the link target differs from the current skill directory, ask whether to update it.
 
 ### `/scrum uninstall`
 
-```bash
-rm ~/.claude/skills/scrum
-```
+Remove the global skill symlink and optionally clean project files:
 
-Optionally ask if project-level Scrum files should also be removed:
-- `docs/scrum/` directory
-- `.claude/agents/scrum-*.md`
-- `.claude/rules/scrum-*.md`
-- Scrum section in CLAUDE.md
+1. **Remove symlink**: `rm ~/.claude/skills/scrum`
+2. **Ask about project files**: "プロジェクトのScrumファイルも削除しますか？"
+   - If yes, remove:
+     - `docs/scrum/` directory
+     - `.claude/agents/scrum-*.md`
+     - `.claude/rules/scrum-*.md`
+     - Scrum section in CLAUDE.md
+   - If no, keep project files (they still work as documentation)
+3. **Report**: Show what was removed
 
 ---
 
@@ -233,7 +239,27 @@ PO agent → create backlog → Sprint Planning → Dev starts.
 1. Read `docs/scrum/sprints/current.md` for sprint state
 2. If external tracker available: query backlog and sprint items
 3. Count sprint archives in `docs/scrum/sprints/`
-4. Display in Japanese
+4. Display in Japanese using this format:
+
+**Output format:**
+
+```
+## {Project Name} Scrum Status
+
+**Current Sprint**: Sprint {N} -- {Goal}
+**Progress**: {completed}/{total} items done
+
+| Item | Status | What It Delivers |
+|------|--------|------------------|
+| {name} | {status} | {user-facing value} |
+
+**Backlog**: {N} items remaining
+**Completed Sprints**: {N} (Sprint 1-{N} archived)
+
+{If no active sprint: "No active sprint. Ready for next Sprint Planning."}
+```
+
+Focus on what the stakeholder cares about: what's being worked on, what they'll get, and what's next.
 
 ---
 
