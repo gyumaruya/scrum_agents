@@ -13,7 +13,7 @@ Scrumスキルの基本ループ（Planning → Dev → Review → Retro）を�
 |---|------|--------|-------|
 | 1 | Scrum環境セットアップをコミット | done | docs/scrum/, agents, rules 作成済み |
 | 2 | セレモニー/エージェント定義のギャップを発見・修正 | done | 3件修正: エージェント環境適応、セットアップ手順、VCSハードコード |
-| 3 | PR #2 をレビュー可能な状態にする | in_progress | ステークホルダーがレビューできる形に |
+| 3 | PR #2 をレビュー可能な状態にする | done | コミット・プッシュ済み、DoD確認済み |
 
 Status: `pending` | `in_progress` | `done` | `blocked`
 
