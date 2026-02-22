@@ -32,26 +32,36 @@ Auto-trigger when the Developer agent completes an item or hits a blocker.
 
 Developer reports current status:
 - Sprint Goal progress
-- Item statuses
+- Item statuses (including DoD inspection results for completed items)
 - Blockers encountered
 
-### 2. Inspect (SM)
+### 2. DoD Checkpoint (Dev)
+
+For any items recently marked `done`, verify:
+- Was a DoD self-inspection recorded in the sprint log?
+- Did all DoD criteria pass?
+- If no inspection was recorded, the item is NOT done. Revert to `in_progress` and inspect.
+
+This step prevents items from reaching Sprint Review without proper inspection.
+
+### 3. Inspect (SM)
 
 Scrum Master inspects process:
 - Is the Sprint Goal still achievable?
 - Are any items blocked?
+- **Are all "done" items backed by a DoD inspection record?**
 - Is the process working well?
 
 Record inspection in `docs/scrum/logs/role-interactions.md`.
 
-### 3. Adapt
+### 4. Adapt
 
 If problems detected:
 - Dev reorders technical work
 - PO adjusts scope if needed (reduce scope, keep goal)
 - SM logs adaptation in `docs/scrum/logs/adaptations.md`
 
-### 4. Update
+### 5. Update
 
 Update `docs/scrum/sprints/current.md` log with timestamp.
 

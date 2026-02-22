@@ -18,6 +18,17 @@ An Increment is "Done" when ALL criteria are met:
   - ruff detected → "ruff check passes"
   - eslint detected → "eslint passes"
 
+## Versioning (MANDATORY for skill file changes)
+
+- [ ] SKILL.md `metadata.version` bumped according to versioning policy
+- [ ] `docs/scrum/.scrum-version` updated to match (via `/scrum update` or manually)
+- [ ] Version bump rationale recorded in sprint log or decisions.md
+
+**Versioning Policy (SemVer):**
+- **Major** (X.0.0): Breaking changes -- file structure changes, removed features, incompatible ceremony flow
+- **Minor** (x.Y.0): New features -- new ceremony steps, new agent capabilities, new sections in templates
+- **Patch** (x.y.Z): Fixes -- wording improvements, bug fixes, template tweaks, cleanup
+
 ## Delivery Verification (MANDATORY for skill/process file changes)
 
 - [ ] Changes merged to main

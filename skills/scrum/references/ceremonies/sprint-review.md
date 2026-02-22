@@ -22,10 +22,13 @@
 
 ## Process
 
-### 1. Prepare (Dev)
+### 1. Pre-Review DoD Verification (Dev)
 
 Spawn `scrum-developer` agent:
 - Read `docs/scrum/sprints/current.md` for goal and completed items
+- **Verify ALL items marked `done` have a DoD inspection record in the sprint log**
+- If any item lacks a DoD inspection: perform the inspection NOW before proceeding
+- If any DoD criterion fails: revert the item to `in_progress` and report
 - Collect what was built (change summary, features delivered, files changed)
 - Prepare increment presentation
 

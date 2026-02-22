@@ -9,7 +9,7 @@ description: |
 metadata:
   short-description: Scrum framework for AI agents
   argument-hint: "[install|uninstall|update|plan|daily|review|retro|refine|status]"
-  version: 1.1.0
+  version: 1.2.0
 ---
 
 # Scrum Skill
@@ -127,6 +127,49 @@ During setup, if no external tool is detected, suggest (not require):
 例: GitHub Issues, GitLab Issues, Jira, Redmine など。
 対応するスキルや MCP があれば導入をお勧めします。
 なくても、マークダウンファイルで全て運用できます。"
+
+---
+
+## Session Continuity (CRITICAL)
+
+AI agents lose context between sessions. This section ensures Scrum state survives session boundaries.
+
+### Session Start Protocol
+
+On every session start (or `/scrum` invocation after setup), agents MUST:
+
+1. Read `docs/scrum/sprints/current.md` -- current sprint state, goal, item statuses
+2. Read the **Sprint Summary** section in `current.md` for quick context
+3. Read `docs/scrum/backlog.md` -- remaining work and priorities
+4. Read `docs/scrum/definition-of-done.md` -- quality criteria
+
+This gives the agent enough context to continue where the previous session left off.
+
+### Sprint Summary Maintenance
+
+The Developer MUST update the **Sprint Summary** section in `current.md` whenever:
+- An item's status changes
+- A significant decision is made
+- A blocker is encountered or resolved
+- The session is about to end (if known)
+
+Sprint Summary format:
+```markdown
+### Sprint Summary (for session continuity)
+**What**: {1-2 sentence summary}
+**Progress**: {X/Y items done}
+**Key decisions**: {recent important decisions, max 3}
+**Next action**: {what should happen next if session resumes}
+```
+
+### CLAUDE.md Integration
+
+The `## Scrum` section in CLAUDE.md (written by `/scrum` setup or `/scrum update`) ensures that even without explicit `/scrum` invocation, new sessions are aware of:
+- Artifact locations
+- Flow rules
+- Anti-patterns
+
+This section is loaded automatically on every session start.
 
 ---
 
