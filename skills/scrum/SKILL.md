@@ -8,7 +8,8 @@ description: |
   Triggers: "scrum", "sprint", "retrospective", "backlog", "レトロ", "計画", "振り返り"
 metadata:
   short-description: Scrum framework for AI agents
-  argument-hint: "[install|uninstall|plan|daily|review|retro|refine|status]"
+  argument-hint: "[install|uninstall|update|plan|daily|review|retro|refine|status]"
+  version: 1.0.0
 ---
 
 # Scrum Skill
@@ -16,6 +17,19 @@ metadata:
 Scrum is the MEANS, not the GOAL. The goal is delivering value to users.
 
 Arguments: $ARGUMENTS
+
+## Version Check (on every invocation)
+
+Before routing arguments, check for version mismatch:
+
+1. If `docs/scrum/` exists (not first-time setup):
+   - Read `metadata.version` from this SKILL.md (currently: `1.0.0`)
+   - Read `docs/scrum/.scrum-version` (if exists)
+   - If versions differ or `.scrum-version` is missing: display "スキル v{new} が利用可能です（現在 v{old}）。`/scrum update` で更新してください。" (If `.scrum-version` is missing, treat as `unknown`.)
+   - Continue with the requested action regardless (version check is informational only)
+2. If `docs/scrum/` does not exist: proceed to setup (no version check needed)
+
+---
 
 ## Argument Routing
 
@@ -30,6 +44,7 @@ Arguments: $ARGUMENTS
 | `review` | Sprint Review → `references/ceremonies/sprint-review.md` |
 | `retro` | Retrospective → `references/ceremonies/sprint-retrospective.md` |
 | `refine` | Backlog Refinement → `references/ceremonies/backlog-refinement.md` |
+| `update` | Update project Scrum files to match latest skill version |
 | `status` | Show current sprint status |
 
 **Detect first time**: Check if `docs/scrum/` directory exists in project root.
@@ -141,6 +156,7 @@ Local Scrum records (always created, regardless of tools):
 
 ```
 docs/scrum/
+  .scrum-version                          # Installed skill version (e.g., "1.0.0")
   definition-of-done.md                   # DoD (evolves through retros)
   sprints/
     current.md                            # Current sprint state
@@ -220,15 +236,23 @@ Or:
 - Code review: Direct stakeholder review
 ```
 
-### Step 4: Update CLAUDE.md
+### Step 4: Record Skill Version
+
+Write the current skill version to `docs/scrum/.scrum-version`:
+```
+1.0.0
+```
+This file is a single line containing only the version number. It is used by the Version Check to detect when the skill has been updated.
+
+### Step 5: Update CLAUDE.md
 
 Append Scrum section with artifact locations and auto-flow rules.
 
-### Step 5: Ask for Product Goal
+### Step 6: Ask for Product Goal
 
 "Scrum を導入しました。このプロジェクトで何を実現したいですか？"
 
-### Step 6: Auto-flow
+### Step 7: Auto-flow
 
 PO agent → create backlog → Sprint Planning → Dev starts.
 
@@ -260,6 +284,66 @@ PO agent → create backlog → Sprint Planning → Dev starts.
 ```
 
 Focus on what the stakeholder cares about: what's being worked on, what they'll get, and what's next.
+
+---
+
+## Update (`/scrum update`)
+
+Update project Scrum files to match the latest skill version.
+
+### When (Auto-detect)
+
+On every `/scrum` invocation (any argument), the Version Check (above) compares versions:
+1. Read skill version from this SKILL.md's `metadata.version`
+2. Read project version from `docs/scrum/.scrum-version`
+3. If versions differ: show message "スキルバージョンが更新されています (v{old} -> v{new})。`/scrum update` で更新できます。"
+
+The update is NOT automatic -- the user must explicitly run `/scrum update`.
+
+### Process
+
+1. **Read versions**: Compare `metadata.version` with `docs/scrum/.scrum-version`
+2. **Identify changes**: List files that differ between templates and project
+3. **Update managed files**: For each Scrum-managed file:
+   - Read the current project file
+   - Read the latest template from `references/`
+   - Merge: keep project-specific content, update template-managed sections
+   - Files to check:
+     - `.claude/agents/scrum-*.md` <-- `references/agents/`
+     - `.claude/rules/scrum-*.md` <-- `references/rules/`
+     - `docs/scrum/definition-of-done.md` <-- `references/templates/definition-of-done.md`
+4. **Update version**: Write new version to `docs/scrum/.scrum-version`
+5. **Report**: Show what was updated in Japanese
+
+### Customization Preservation
+
+**Principle:** Never overwrite project-specific adaptations.
+
+Strategy:
+- **Agent definitions**: Update template sections (Role Boundary, Artifacts, Record Format). Preserve project-added sections (custom workflows, project-specific notes). When in doubt, show a diff to the user rather than overwriting.
+- **Rules**: Replace entirely (rules are skill-defined, not project-customized).
+- **DoD**: Update Scrum section only. Preserve Quality, Testing, Transparency sections (these are project-adapted by the team).
+- **CLAUDE.md**: Append/update Scrum section only. Never touch non-Scrum content.
+
+### Merge Strategy Details
+
+For agent definitions and DoD, use this merge approach:
+
+1. **Identify template-managed sections**: Sections that originate from the skill templates (e.g., "Role Boundary", "Artifacts" in agent definitions; "Scrum" section in DoD).
+2. **Identify project-specific sections**: Any sections or content added by the project team that are NOT in the template.
+3. **Merge**:
+   - Replace template-managed sections with the latest template content
+   - Keep project-specific sections intact at their current location
+   - If a section exists in both template and project with different content, prefer the template version for template-managed sections
+4. **Report changes**: List each file and what was updated vs. preserved
+
+### Version File
+
+`docs/scrum/.scrum-version` format:
+```
+1.0.0
+```
+Single line, just the version number. Created during `/scrum` setup (Step 4), updated by `/scrum update`.
 
 ---
 
