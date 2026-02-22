@@ -27,6 +27,8 @@ An Increment is "Done" when ALL criteria are met:
 
 - [ ] Acceptance criteria from backlog item are met
 - [ ] Increment is usable (not half-finished)
+- [ ] current.md の Item Status が PO Review 判定と一致している（approved / needs-revision）
+- [ ] role-interactions.md に PO Review の履歴（Review Result, Notes）が記録されている
 
 ---
 
