@@ -29,6 +29,26 @@ cd /path/to/other/project
 # Then in Claude Code: /scrum
 ```
 
+## Self-Update Workflow
+
+スキルや hook を更新した後、自身を再起動して最新状態を反映できる。
+
+```
+1. git push + merge to main     # 変更をメインに反映
+2. npx skills update             # スキルパッケージを更新
+3. /reload                       # セッションを再起動（reload スキル）
+4. 最新のスキル・hook が有効になる
+```
+
+**`/reload` スキル**: セッションを tmux 内で再起動する。
+再起動により以下が反映される:
+- 更新されたスキル定義（SKILL.md 等）
+- 新規・変更された hook
+- CLAUDE.md の変更
+- エージェント定義の変更
+
+開発中にスキルやルールを変更したら、`/reload` で即座に反映を確認できる。
+
 ## Research
 
 - `.claude/docs/research/scrum-principles.md` -- Scrum公式ガイドのリサーチ

@@ -8,6 +8,15 @@
 | Goal Inspection | **SM** | -- | Adaptation decisions |
 | Scope Adjustment | **PO** (if needed) | -- | Updated priorities |
 
+### Participation Rule
+The Daily Scrum is for Developers. If the PO or SM are actively working on
+Sprint Backlog items, they participate as Developers. Otherwise, they do not
+attend (they are not required and should not disrupt the Developer focus).
+
+## Input
+- `docs/scrum/sprints/current.md` -- Current sprint state and item statuses
+- Recent changes (VCS log) -- What was done since last check
+
 ## When (Auto-trigger)
 
 - Mid-sprint, when checking progress is useful
