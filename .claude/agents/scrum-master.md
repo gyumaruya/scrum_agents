@@ -69,6 +69,15 @@ You don't wait for problems to be reported -- you hunt for them.
 - Update your own agent definition when you discover better practices
 - Proactively suggest new Scrum rules or modify existing ones when evidence supports it
 
+## Session Start
+
+On every session start or when spawned:
+1. Read `docs/scrum/sprints/current.md` -- check Sprint Summary and sprint state
+2. Read `docs/scrum/logs/adaptations.md` -- recent process changes
+3. Read `docs/scrum/logs/failures.md` -- recent failures needing attention
+4. Identify process issues from previous sessions
+5. Continue facilitation from where the previous session left off
+
 ## What You Can Change (with evidence)
 
 | Target | File |

@@ -23,7 +23,7 @@ Arguments: $ARGUMENTS
 Before routing arguments, check for version mismatch:
 
 1. If `docs/scrum/` exists (not first-time setup):
-   - Read `metadata.version` from this SKILL.md (currently: `1.1.0`)
+   - Read `metadata.version` from this SKILL.md (currently: `1.2.0`)
    - Read `docs/scrum/.scrum-version` (if exists)
    - If versions differ or `.scrum-version` is missing: display "スキル v{new} が利用可能です（現在 v{old}）。`/scrum update` で更新してください。" (If `.scrum-version` is missing, treat as `unknown`.)
    - Continue with the requested action regardless (version check is informational only)
@@ -414,7 +414,7 @@ The update is NOT automatic -- the user must explicitly run `/scrum update`.
 
 Strategy:
 - **Agent definitions**: Update template sections (Role Boundary, Artifacts, Record Format). Preserve project-added sections (custom workflows, project-specific notes). When in doubt, show a diff to the user rather than overwriting.
-- **Rules**: Replace entirely (rules are skill-defined, not project-customized).
+- **Rules**: Replace entirely (rules are skill-defined, not project-customized). **Important**: If a project's SM or Dev adds valuable content to rules files (e.g., Scrum Guide sections, enforcement details), those improvements MUST be upstreamed into the template files in `references/rules/` BEFORE the next version bump. Otherwise, `/scrum update` will delete them. The SM should check for rule-file diffs during Retrospective and upstream any valuable additions.
 - **DoD**: Update Scrum section only. Preserve Quality, Testing, Transparency sections (these are project-adapted by the team).
 - **CLAUDE.md**: Append/update Scrum section only. Never touch non-Scrum content.
 

@@ -41,6 +41,21 @@ PR #6-#11 の作業中、以下の失敗を繰り返した:
 **根本原因**: 「次のステップを宣言する」ことを「実行した」と混同。宣言は実行ではない。
 **解決**: Anti-Patterns に2項目追加（「宣言だけで止まる」「検証をスキップする」）。
 
+## 2026-02-23 00:06 - /scrum update がプロジェクト固有のルールカスタマイズを削除
+
+Sprint 11 の P23 検証中に `/scrum update` を実行した結果、`.claude/rules/scrum-*.md` の3ファイルでプロジェクト固有のカスタマイズが削除された:
+
+1. **scrum-principles.md**: Sprint Rules (Scrum Guide 2020) セクション全体が削除 -- Sprint Constraints, Sprint Cancellation, Product Goal, Sprint Backlog Ownership, Multiple Increments の5サブセクション（Sprint 7 P10 で追加）
+2. **scrum-values.md**: Courage セクションの2行が削除 -- "Proactively discover and address problems" と "Suggest improvements even when things seem to be working"（Sprint 5 P8 で追加）
+3. **scrum-role-separation.md**: "This Project's Adaptations" セクションが削除、Enforcement セクションの violations 追跡文が削除（Sprint 2 P1 で追加）
+
+**根本原因**: SKILL.md の Customization Preservation ポリシーに「Rules: Replace entirely (rules are skill-defined, not project-customized)」と定義されているため、Dev は定義通りにテンプレートで上書きした。しかし、Sprint 5-7 でルールファイルに追加された改善内容がテンプレート（references/rules/）に上流統合されていなかった。結果、update 時にテンプレートの古い内容で上書きされ、プロジェクトの改善成果が失われた。
+
+**解決**: Sprint 11 Retro で以下を実施:
+1. テンプレートファイル（references/rules/）に削除されたコンテンツを統合
+2. プロジェクトファイル（.claude/rules/）を復元
+3. SKILL.md の Rules ポリシーに上流統合フローの注記を追加
+
 ## 2026-02-22 -- セッション全体: Sprintを開始せずに作業を実行
 
 PR #6-#12 の全作業（セレモニー自動連鎖の強化、バージョン更新、CLAUDE.md更新、
