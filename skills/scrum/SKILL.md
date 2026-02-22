@@ -3,8 +3,8 @@ name: scrum
 description: |
   Scrum framework for AI agent self-management. Brings Scrum practices into
   any project to drive development and continuous improvement.
-  Uses GitHub/Bitbucket Issues for backlog, PRs for sprint work.
-  Ceremonies chain automatically.
+  Ceremonies chain automatically. Tool-agnostic: works with any issue tracker,
+  VCS, or just local markdown files.
   Triggers: "scrum", "sprint", "retrospective", "backlog", "レトロ", "計画", "振り返り"
 metadata:
   short-description: Scrum framework for AI agents
@@ -64,52 +64,48 @@ Optionally ask if project-level Scrum files should also be removed:
 
 ---
 
-## GitHub/Bitbucket Integration
+## Tool Agnosticism
 
-**Scrum artifacts map to platform features:**
+**This skill defines Scrum process, NOT specific tools.**
 
-| Scrum Artifact | Platform Feature |
-|---------------|-----------------|
-| Product Backlog | **Issues** (label: `backlog`) |
-| Sprint Backlog | **Issues** (label: `sprint:current`, assigned to milestone) |
-| Sprint Work | **Pull Requests** (branch per item or per sprint) |
-| Sprint Review | **PR review** by stakeholder |
-| Feedback | **Issue/PR comments** (async) |
-| Definition of Done | `docs/scrum/definition-of-done.md` (in repo) |
+Scrum requires certain capabilities (backlog management, work tracking, increment review).
+HOW those capabilities are fulfilled depends on the project's environment.
 
-### Issue Labels (created at setup)
+### Scrum Capabilities → Environment Mapping
 
-```
-backlog          - Product Backlog item
-sprint:current   - Selected for current sprint
-priority:high    - High priority
-priority:medium  - Medium priority
-priority:low     - Low priority
-type:feature     - Feature
-type:bug         - Bug fix
-type:improvement - Process improvement (from retro)
-```
+| Scrum Capability | What is Needed | Examples |
+|-----------------|----------------|----------|
+| Product Backlog | A place to list and prioritize work items | Issue tracker, `docs/scrum/backlog.md` |
+| Sprint Backlog | A way to mark items as "in this sprint" | Labels/tags, sprint board, `docs/scrum/sprints/current.md` |
+| Sprint Work | A way to develop and track changes | Branches + PRs/MRs, local commits |
+| Increment Review | A way to present work to stakeholder | PR/MR review, demo, deploy preview |
+| Feedback | A way for stakeholder to respond asynchronously | Comments on PR/MR/Issue, `docs/scrum/` notes |
+| Sprint Archive | A persistent record of each sprint | `docs/scrum/sprints/YYYY-MM-DD_sprint-NNN/` (always) |
 
-### Workflow
+### Environment Detection (at setup)
 
-```
-Stakeholder desire → PO creates Issue (label: backlog)
-  → Sprint Planning: select Issues (label: sprint:current)
-  → Dev: create branch + PR for sprint work
-  → Increment ready → PR ready for review
-  → Stakeholder reviews PR (async feedback)
-  → Merge PR → Retro → SM creates improvement Issue
-```
+During setup, detect what's available:
 
-**Async benefit**: Stakeholder reviews PRs and comments on Issues at their own pace.
-Agent continues working on other items while waiting for feedback.
+1. **VCS**: git? Other?
+2. **Remote platform**: Check for existing skills, MCPs, or CLIs (e.g., `gh`, `glab`, `bb`)
+3. **Issue tracker**: Integrated with platform? Separate (Jira, Redmine)?
+4. **User preference**: Ask stakeholder if they have a preferred workflow
 
-### Fallback (no GitHub/Bitbucket)
+### Adaptation Rules
 
-If `gh` CLI is not available or no remote configured:
-- Use `docs/scrum/backlog.md` as markdown backlog
-- Use `docs/scrum/sprints/current.md` for sprint state
-- Everything still works, just without async platform integration
+- **Always**: Use `docs/scrum/` for local Scrum records (sprint archives, logs, DoD). This is the source of truth for the Scrum process itself.
+- **If external tools are available**: Use them for backlog management, work tracking, and async communication. Map Scrum concepts to the platform's native features.
+- **If no external tools**: Use `docs/scrum/backlog.md` and `docs/scrum/sprints/current.md` as the full workflow. Everything works.
+- **If stakeholder specifies tools**: Adapt to their environment. Ask for guidance on how to use unfamiliar tools, or recommend they install appropriate skills/MCPs.
+
+### Recommending Tools (not requiring them)
+
+During setup, if no external tool is detected, suggest (not require):
+
+"バックログ管理や非同期フィードバックのために、プロジェクト管理ツールの導入を検討できます。
+例: GitHub Issues, GitLab Issues, Jira, Redmine など。
+対応するスキルや MCP があれば導入をお勧めします。
+なくても、マークダウンファイルで全て運用できます。"
 
 ---
 
@@ -119,23 +115,23 @@ Ceremonies chain automatically. The user does NOT invoke each one.
 
 ```
 User expresses desire
-  → PO: create Issue (or backlog item) automatically
+  → PO: create backlog item automatically
   → Sprint Planning: auto-start if no active sprint
-  → Dev: implement via PR
-  → Increment ready → Sprint Review (PR review)
+  → Dev: implement (branch + changes)
+  → Increment ready → Sprint Review (present to stakeholder)
   → Stakeholder feedback → Retrospective auto-runs
   → SM improves org → Next sprint
 ```
 
 The user only needs to:
 - Express desires
-- Review PRs / give feedback on Issues
+- Review increments and give feedback
 
 ---
 
 ## File Structure
 
-Local Scrum records (always created, regardless of platform):
+Local Scrum records (always created, regardless of tools):
 
 ```
 docs/scrum/
@@ -153,7 +149,8 @@ docs/scrum/
     adaptations.md                        # Real-time adaptations
 ```
 
-When GitHub is available, `docs/scrum/backlog.md` is optional -- Issues ARE the backlog.
+If external issue tracker is available, `docs/scrum/backlog.md` is optional.
+The external tracker IS the backlog. Local records track the Scrum process itself.
 
 ---
 
@@ -164,8 +161,9 @@ When `docs/scrum/` does NOT exist:
 ### Step 1: Detect Environment
 
 - Tech stack (`pyproject.toml`, `package.json`, `Cargo.toml`, etc.)
-- Git remote and platform (`gh` CLI available? GitHub? Bitbucket?)
+- VCS and remote platform (what tools/skills/MCPs are available?)
 - Existing CLAUDE.md and `docs/`
+- Ask stakeholder about preferred tools if unclear
 
 ### Step 2: Create Local Structure
 
@@ -178,7 +176,7 @@ Read reference files from `references/` and write to the project:
 - `logs/decisions.md` ← empty with header
 - `logs/adaptations.md` ← empty with header
 
-If no GitHub: also create `backlog.md` from template.
+If no external issue tracker: also create `backlog.md` from template.
 
 **Agents** (`.claude/agents/`):
 - `scrum-product-owner.md`
@@ -189,17 +187,25 @@ If no GitHub: also create `backlog.md` from template.
 - `scrum-principles.md`
 - `scrum-values.md`
 
-### Step 3: Setup GitHub Labels (if available)
+### Step 3: Configure Environment Mapping
 
-```bash
-gh label create backlog --description "Product Backlog item" --color 0E8A16
-gh label create "sprint:current" --description "Current sprint" --color 1D76DB
-gh label create "priority:high" --color D93F0B
-gh label create "priority:medium" --color FBCA04
-gh label create "priority:low" --color 0E8A16
-gh label create "type:feature" --color 5319E7
-gh label create "type:bug" --color B60205
-gh label create "type:improvement" --description "From retrospective" --color C2E0C6
+Record detected tools and how Scrum concepts map to them in `docs/scrum/sprints/current.md`
+or CLAUDE.md. Example:
+
+```
+## Scrum Environment
+- Backlog: GitHub Issues (via `gh` CLI)
+- Sprint tracking: GitHub labels
+- Code review: Pull Requests
+```
+
+Or:
+
+```
+## Scrum Environment
+- Backlog: docs/scrum/backlog.md
+- Sprint tracking: docs/scrum/sprints/current.md
+- Code review: Direct stakeholder review
 ```
 
 ### Step 4: Update CLAUDE.md
@@ -212,18 +218,15 @@ Append Scrum section with artifact locations and auto-flow rules.
 
 ### Step 6: Auto-flow
 
-PO agent → create backlog (Issues or markdown) → Sprint Planning → Dev starts.
+PO agent → create backlog → Sprint Planning → Dev starts.
 
 ---
 
 ## Status (`/scrum status`)
 
-1. If GitHub available:
-   - `gh issue list --label backlog` for backlog size
-   - `gh issue list --label "sprint:current"` for sprint items
-   - `gh pr list` for active PRs
-2. Read `docs/scrum/sprints/current.md`
-3. Count sprint archives
+1. Read `docs/scrum/sprints/current.md` for sprint state
+2. If external tracker available: query backlog and sprint items
+3. Count sprint archives in `docs/scrum/sprints/`
 4. Display in Japanese
 
 ---
@@ -235,7 +238,7 @@ After retrospective:
 1. Create `docs/scrum/sprints/YYYY-MM-DD_sprint-NNN/`
 2. Save: `plan.md`, `log.md`, `review.md`, `retrospective.md`
 3. Reset `docs/scrum/sprints/current.md`
-4. If GitHub: close sprint Issues, remove `sprint:current` labels
+4. If external tracker: update item statuses (close completed items, etc.)
 5. Commit the archive
 
 ---

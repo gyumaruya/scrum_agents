@@ -31,32 +31,28 @@ Claude Code で `/scrum install` を実行:
 
 ```
 ユーザー: "Xが欲しい"
-  → PO が Issue 作成（バックログ）
+  → PO がバックログアイテム作成
   → Sprint Planning 自動実行
-  → Dev がブランチ + PR で実装
-  → インクリメント完成 → Sprint Review（PR レビュー）
-  → ユーザーが PR/Issue でフィードバック（非同期）
+  → Dev が実装
+  → インクリメント完成 → Sprint Review
+  → ユーザーがフィードバック（非同期可）
   → Retrospective 自動実行 → 組織が改善
   → 次のスプリントへ
 ```
 
 ユーザーがやること:
 1. 欲しいものを伝える
-2. PR をレビューし、Issue/PR コメントでフィードバックする
+2. インクリメントをレビューし、フィードバックする
 
 それ以外は全て自動。
 
-### GitHub/Bitbucket 連携
+### ツール非依存
 
-| Scrum アーティファクト | プラットフォーム機能 |
-|----------------------|-------------------|
-| Product Backlog | Issues（label: `backlog`） |
-| Sprint Backlog | Issues（label: `sprint:current`） |
-| Sprint Work | Pull Requests |
-| Sprint Review | PR レビュー |
-| フィードバック | Issue/PR コメント（非同期） |
+このスキルは **Scrum のプロセス** を定義する。特定のツールには依存しない。
 
-`gh` CLI が使えない環境では、マークダウンファイルにフォールバック。
+- Issue トラッカーがあれば活用する（GitHub, GitLab, Jira, Redmine 等）
+- なくても `docs/scrum/` のマークダウンファイルで全て運用可能
+- 導入時に環境を検出し、最適なワークフローを構成する
 
 ### 手動コマンド（必要な時だけ）
 
@@ -87,7 +83,7 @@ docs/scrum/
     adaptations.md                   適応ログ
 ```
 
-GitHub 環境では Issues がバックログ。`gh` が使えない場合は `docs/scrum/backlog.md` を使用。
+外部ツールがあればそれがバックログ。なければ `docs/scrum/backlog.md` を使用。
 
 ## 自己成長
 
