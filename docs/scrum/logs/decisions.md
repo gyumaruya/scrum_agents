@@ -144,3 +144,69 @@ P22 の AC を更新: P19 完了を踏まえ「heartbeat が検査の自動ト�
 **Decision**: SM エージェント定義に「安定期でも最低1つの改善提案」ガイドラインを追加し、sprint-retrospective.md に安定期の改善発見レンズ6項目を追加。
 
 **Rationale**: Scrum の適応の柱は問題がないときにも機能すべき。改善の不在は改善機会の見落とし。
+
+## 2026-02-23 - P22 Heartbeat パターン調査結果
+
+**Context**: ステークホルダーが「heartbeat パターン」を Scrum スキルへの適用候補として提起。OpenClaw 等で採用されている。リサーチを実施して適用判断を行う。
+
+### Heartbeat パターン概要
+
+**定義**: AI エージェントが定期的（30分間隔等）に自律起動し、タスクキューの確認・プロアクティブな作業実行を行うパターン。OpenClaw で主要アーキテクチャとして採用され、2025年11月のオープンソース化以降、2026年1月に GitHub スター数20万を達成。
+
+**主要コンポーネント**:
+1. **Heartbeat**: 定期的なエージェント起動（cron等）。HEARTBEAT.md を読み、実行すべきタスクがあれば実行、なければスリープ。
+2. **Cron Jobs**: 特定時刻に実行される定型タスク（朝のブリーフィング等）。
+3. **Self-healing**: heartbeat 時にジョブの鮮度を確認し、26時間以上古ければ再実行を強制。
+
+**heartbeat vs cron**:
+- Heartbeat: 複数チェックのバッチ処理、タイミングの厳密性は不要
+- Cron: 正確なスケジュール、メインセッションからの独立
+
+### 実装例
+
+| Project | Implementation | Purpose |
+|---------|---------------|---------|
+| OpenClaw | 30分間隔 heartbeat + cron | プロアクティブな個人アシスタント |
+| nanobot (HKUDS) | heartbeat monitoring | 長時間タスクの自律実行 |
+| 各種 fork | 設定可能な間隔 | 価格監視、コンテンツスカウト、ヘルスチェック |
+
+### Scrum スキルとの関連性評価
+
+**現在の Scrum スキルの検査メカニズム**:
+- P19: DoD 自己検査チェックポイント（アイテム完了時、Daily Scrum 時、Sprint Review 前）
+- P27: リアルタイム問題記録（問題発生即時 + Daily Scrum で確認）
+- セッション継続性: Sprint Summary、Session Start Protocol
+
+**heartbeat が追加できる価値**:
+| 観点 | 評価 |
+|------|------|
+| Sprint 中の定期的自己検査 | 中: 現在はイベント駆動（アイテム完了時）。heartbeat なら時間駆動で補完可能 |
+| failures/adaptations の定期確認 | 低: P27 の Daily Scrum ステップで既にカバー |
+| Sprint Summary の自動更新 | 低: Developer が手動で更新する方が正確 |
+| セレモニーの自動トリガー | 低: 現在のイベント駆動で十分。時間駆動はオーバーヘッド |
+
+### 適用判断
+
+**判断: Scrum スキルには組み込まない。別スキルとして分離が適切。**
+
+**根拠**:
+
+1. **アーキテクチャの不一致**: Scrum スキルはセレモニー定義・エージェント定義・ルールのパッケージ。heartbeat はインフラストラクチャ（cron、プロセス管理）を必要とし、スキルパッケージの範囲を超える。
+
+2. **イベント駆動 vs 時間駆動**: Scrum の検査はイベント駆動（アイテム完了、Daily Scrum、Sprint Review）が自然。heartbeat の時間駆動は Scrum の「何かが起きたら検査する」原則と整合しない。
+
+3. **既存メカニズムの十分性**: P19（DoD 検査）+ P27（リアルタイム問題記録）で Sprint 中の検査は構造的にカバーされている。heartbeat が追加する価値は限定的。
+
+4. **ステークホルダーの示唆**: 「これ自体は別スキルかもしれない」という示唆と一致。
+
+5. **関心の分離**: heartbeat スキルが独立すれば、Scrum スキルに限らず任意のプロジェクトで使える。Scrum 固有の関心（検査チェックポイント等）はScrumスキル内に留める。
+
+**将来の可能性**: heartbeat スキルが別途作成された場合、Scrum スキルと連携する設計案:
+- heartbeat が HEARTBEAT.md に「Sprint 検査を実行」と記載 → `/scrum daily` を自動トリガー
+- heartbeat が Sprint Summary の鮮度を確認 → 古ければ更新を促す
+- これらは Scrum スキル側の変更なしで実現可能（heartbeat スキルが `/scrum` を呼ぶだけ）
+
+**参考情報**:
+- [OpenClaw 公式](https://openclaw.ai/)
+- [OpenClaw Heartbeat 解説](https://insights.reinventing.ai/knowledge/openclaw-heartbeats)
+- [OpenClaw Architecture 分析](https://bibek-poudel.medium.com/how-openclaw-works-understanding-ai-agents-through-a-real-architecture-5d59cc7a4764)

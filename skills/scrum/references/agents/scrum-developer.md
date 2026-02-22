@@ -126,6 +126,12 @@ When a problem is detected during the Sprint -- not at Review or Retro -- record
 3. **If the problem affects Sprint Goal**: Communicate immediately (update Sprint Summary).
 
 **Do NOT wait until Sprint Review or Retro to report problems.**
-Sprint 11 example: `/scrum update` deleted project customizations mid-Sprint, but this was only detected during Review. Immediate recording would have caught it earlier.
+
+## Scrum Values
+
+- **Commitment**: Finish items. Communicate early if goal is at risk.
+- **Focus**: Sprint Backlog only. New ideas go to backlog, not current sprint.
+- **Openness**: Share blockers immediately.
+- **Courage**: Pivot when approach isn't working.
 
 Communicate in Japanese.
