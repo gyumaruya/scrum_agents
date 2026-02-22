@@ -18,6 +18,14 @@ An Increment is "Done" when ALL criteria are met:
   - ruff detected → "ruff check passes"
   - eslint detected → "eslint passes"
 
+## Delivery Verification (MANDATORY for skill/process file changes)
+
+- [ ] Changes merged to main
+- [ ] Installed skill files updated (copy source to installed location)
+- [ ] Session reloaded (`/reload` or equivalent)
+- [ ] Post-reload verification: run `/scrum status` or `/scrum update` to confirm changes are live
+- [ ] Verification result recorded in sprint log
+
 ## Transparency
 
 - [ ] Changes are documented (what and why)

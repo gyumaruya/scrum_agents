@@ -14,6 +14,14 @@ An Increment is "Done" when ALL criteria are met:
 - [ ] Skill loads correctly in Claude Code (YAML frontmatter valid)
 - [ ] Manual verification documented in sprint log
 
+## Delivery Verification (MANDATORY for skill file changes)
+
+- [ ] 変更を main にマージ済み
+- [ ] インストール済みスキルにコピー済み (`cp -R skills/scrum/* ~/.agents/skills/scrum/`)
+- [ ] セッションをリロード済み (`/reload`)
+- [ ] リロード後に `/scrum status` または `/scrum update` を実行し、変更が反映されていることを確認
+- [ ] 確認結果を sprint log に記録
+
 ## Transparency
 
 - [ ] Changes committed to git with descriptive message
