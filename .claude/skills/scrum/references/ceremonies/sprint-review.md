@@ -1,54 +1,43 @@
 # Sprint Review
 
-## When
+## When (Auto-trigger)
 
-- A meaningful increment is ready to show
-- Sprint Goal items are complete
-- User says "レビュー", "review", "見せて"
+- All Sprint Backlog items are `done` or sprint is otherwise complete
+- Developer agent reports increment is ready
+- Manual: `/scrum review`
 
 ## Process
 
-### 1. Prepare the Increment
+### 1. Prepare
 
-- Read `.claude/scrum/current-sprint.md` for Sprint Goal and completed items
-- Review what was actually built (git diff, file changes, features)
-- Verify against Definition of Done (`.claude/scrum/definition-of-done.md`)
+- Read `docs/scrum/sprints/current.md` for goal and completed items
+- Verify against `docs/scrum/definition-of-done.md`
+- Collect what was built (git diff summary, features, files changed)
 
 ### 2. Present to Stakeholder
 
-In Japanese, show the stakeholder:
-- What the Sprint Goal was
-- What was delivered (concrete, demonstrable results)
-- How it works (show files, run demos if applicable)
+In Japanese, show:
+- Sprint Goal and whether it was achieved
+- What was delivered (concrete results)
 - What was NOT delivered and why (transparency)
 
 ### 3. Gather Feedback
 
-Ask the stakeholder:
-- Does this meet your expectations?
-- What would you change?
-- What do you want next?
+Ask briefly: "期待通りですか？変更や追加はありますか？"
 
 ### 4. Update Backlog
 
 Spawn `scrum-product-owner` agent to:
-- Incorporate feedback as new backlog items
-- Re-order backlog based on stakeholder priorities
-- Remove items that are no longer relevant
-- Update `.claude/scrum/product-backlog.md`
+- Add feedback as new items
+- Re-order backlog
+- Remove completed or irrelevant items
+- Write to `docs/scrum/backlog.md`
 
-### 5. Close Sprint Items
+### 5. Record Review
 
-In `.claude/scrum/current-sprint.md`, mark all completed items as `done`.
+Save to sprint archive later (during archival after retro).
+Update `docs/scrum/sprints/current.md` log with review outcome.
 
-## Output
+## Auto-next
 
-Summary in Japanese:
-- Sprint Goal: achieved / partially achieved / not achieved
-- Key deliverables
-- Stakeholder feedback captured
-- Backlog updated
-
-## Next Step
-
-"振り返りを行いますか？ `/scrum retro` で改善点を見つけて組織を成長させましょう。"
+After stakeholder feedback → auto-trigger Retrospective.

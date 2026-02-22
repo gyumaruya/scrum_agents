@@ -1,10 +1,12 @@
-# Sprint {N}
+# Current Sprint
 
-## Sprint Goal
+## Sprint {N} -- started {YYYY-MM-DD}
+
+### Goal
 
 {Defined during Sprint Planning}
 
-## Sprint Backlog
+### Backlog
 
 | # | Item | Status | Notes |
 |---|------|--------|-------|
@@ -12,10 +14,11 @@
 
 Status: `pending` | `in_progress` | `done` | `blocked`
 
-## Blockers
+### Blockers
 
 None.
 
-## Log
+### Log
 
-<!-- Daily updates go here -->
+<!-- Append entries with timestamps -->
+<!-- - YYYY-MM-DD HH:MM: {what happened} -->

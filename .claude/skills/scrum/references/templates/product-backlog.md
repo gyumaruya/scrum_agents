@@ -8,5 +8,4 @@
 
 ## Items
 
-<!-- Ordered by value. PO agent maintains this file. -->
-<!-- Higher items = higher priority. -->
+<!-- Ordered by value (highest first). PO agent maintains this file. -->

@@ -1,33 +1,35 @@
 # Scrum Principles
 
-This project practices Scrum. All agent behavior follows these principles.
+This project practices Scrum. Ceremonies chain automatically.
 
-## Three Pillars of Empiricism
+## Empiricism
 
 ### Transparency
-
-- All work, decisions, and assumptions are visible
-- State uncertainty openly: "I don't know X, my assumption is Y"
-- Product Backlog is the single source of truth
+- All work, decisions, assumptions are visible in `docs/scrum/`
+- Log failures, decisions, adaptations as they happen
+- State uncertainty openly
 
 ### Inspection
-
-- Frequently inspect progress toward the Sprint Goal
-- Detect problems early, before they compound
-- Every increment is reviewed against the Definition of Done
+- Inspect progress toward Sprint Goal frequently
+- Every increment is verified against Definition of Done
+- Sprint Review inspects the outcome with stakeholder
 
 ### Adaptation
-
-- When inspection reveals problems, adapt immediately
-- Do not wait for a ceremony to fix obvious issues
-- After each sprint, retrospective findings become concrete file changes
+- When problems are detected, adapt immediately (don't wait for ceremony)
+- Log adaptations in `docs/scrum/logs/adaptations.md`
+- Retrospective produces concrete file changes
 
 ## Self-Management
 
-The agent team decides:
-- **What** to work on (PO translates stakeholder desires)
-- **When** to deliver (Sprint boundaries are goal-based)
-- **How** to work (Dev chooses implementation approach)
-- **How to improve** (SM runs retrospectives)
+Agents decide what, when, and how. Stakeholder provides direction, not commands.
 
-The stakeholder (user) provides direction, not commands.
+## Automatic Ceremony Flow
+
+Ceremonies are NOT manual steps. They chain automatically:
+
+1. **Stakeholder desire** → PO creates backlog items → Planning auto-starts → Dev implements
+2. **Increment ready** → Review auto-runs → stakeholder gives feedback
+3. **Review done** → Retro auto-runs → SM improves organization → archive sprint
+4. **Retro done** → Next sprint ready (auto-start if backlog has items)
+
+Only intervene manually when the automatic flow breaks down.

@@ -2,40 +2,33 @@
 
 ## When
 
-- Backlog needs updating between sprints
-- New stakeholder desires emerge
-- User says "バックログ", "refine", "整理"
+- Between sprints
+- New stakeholder desires emerge mid-sprint (add to backlog, don't disrupt sprint)
+- Manual: `/scrum refine`
 
 ## Process
 
-### 1. Review Current Backlog
+### 1. Review
 
-Read `.claude/scrum/product-backlog.md`.
+Read `docs/scrum/backlog.md`.
 
 ### 2. Refine
 
 Spawn `scrum-product-owner` agent to:
-- Add detail to top items (acceptance criteria, notes)
-- Remove stale or completed items
+- Add detail to top items (acceptance criteria)
+- Remove stale items
 - Re-order by value
-- Split large items into smaller ones
+- Split large items
 - Add new items from stakeholder desires
 
 ### 3. Present
 
-Show the stakeholder the updated backlog in Japanese.
-Ask if priorities are correct.
+Show updated backlog briefly. Ask if priorities are correct.
 
-### 4. Update
+### 4. Write
 
-Write updated backlog to `.claude/scrum/product-backlog.md`.
+Update `docs/scrum/backlog.md`.
 
 ## Output
 
-- Updated backlog summary
-- What changed (items added/removed/reordered)
-- Top 3 items ready for next sprint
-
-## Next Step
-
-If ready to start a sprint: `/scrum plan`
+Updated backlog summary. Top 3 items ready for next sprint.

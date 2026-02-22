@@ -1,49 +1,45 @@
 # Daily Scrum
 
-## When
+## When (Auto-trigger)
 
-- Mid-sprint progress check
-- When you want to inspect and adapt
-- User says "進捗", "daily", "どうなってる"
+- Mid-sprint, when checking progress is useful
+- When a blocker is detected
+- Manual: `/scrum daily`
+
+Note: For AI agents, this is less about "daily" and more about periodic inspection.
+Auto-trigger when the Developer agent completes an item or hits a blocker.
 
 ## Process
 
-### 1. Read Current State
+### 1. Read State
 
-Read `.claude/scrum/current-sprint.md` to understand:
+Read `docs/scrum/sprints/current.md`:
 - Sprint Goal
-- Item statuses (pending/in_progress/done/blocked)
-- Any logged blockers
+- Item statuses
+- Blockers
 
 ### 2. Inspect
 
-For each in-progress item:
-- What progress has been made?
-- Is it on track to complete?
-- Are there any blockers?
+- Is the Sprint Goal still achievable?
+- Are any items blocked?
+- Should work be reordered?
 
 ### 3. Adapt
 
-If problems are detected:
-- Reorder remaining work
-- Drop items if Sprint Goal is at risk (keep the goal, reduce scope)
-- Flag blockers for immediate resolution
+If problems detected:
+- Reorder work
+- Drop items to protect Sprint Goal (reduce scope, keep goal)
+- Log adaptation in `docs/scrum/logs/adaptations.md`
 
-### 4. Update Sprint File
+### 4. Update
 
-Update `.claude/scrum/current-sprint.md`:
-- Item status changes
-- Add log entry with today's date
-- Note any adaptations made
+Update `docs/scrum/sprints/current.md` log with timestamp.
 
 ## Output
 
-Brief status in Japanese:
-- Sprint Goal progress (on track / at risk / blocked)
-- Items done / in progress / remaining
-- Any adaptations made
-- What happens next
+Brief status. Continue development.
 
-## Next Step
+## Auto-next
 
-Continue development. If increment is ready, suggest `/scrum review`.
+If all items done → auto-trigger Sprint Review.
+Otherwise → continue development.

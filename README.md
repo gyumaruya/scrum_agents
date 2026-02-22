@@ -1,6 +1,6 @@
 # Scrum Agents
 
-AI エージェントが Scrum を実践し、ユーザーに価値を届けるためのスキルパッケージ。
+AI エージェントが Scrum を自動実践し、ユーザーに価値を届けるスキルパッケージ。
 
 ## インストール
 
@@ -10,73 +10,70 @@ cd scrum_agents
 ./install.sh
 ```
 
-`~/.claude/skills/scrum` にシンボリックリンクが作成されます。
-
 ## 使い方
 
-任意のプロジェクトで Claude Code を起動し:
+任意のプロジェクトで:
 
 ```
 /scrum
 ```
 
-初回呼び出しでプロジェクトに Scrum フレームワークが導入されます。
+初回でフレームワーク導入 → Product Goal を聞かれる → 答えるだけで開発が始まる。
 
-### コマンド
+### 自動フロー
+
+```
+ユーザー: "Xが欲しい"
+  → PO が自動でバックログ作成
+  → Sprint Planning 自動実行
+  → Dev が実装開始
+  → インクリメント完成 → Sprint Review 自動実行
+  → ユーザーがフィードバック → Retrospective 自動実行
+  → 組織が改善される → 次のスプリントへ
+```
+
+ユーザーがやること:
+1. 欲しいものを伝える
+2. レビューでフィードバックする
+
+それ以外は全て自動。
+
+### 手動コマンド（必要な時だけ）
 
 | コマンド | 説明 |
 |---------|------|
-| `/scrum` | 初回: セットアップ / 以降: ステータス表示 |
-| `/scrum plan` | Sprint Planning: ゴール設定 + 開発開始 |
-| `/scrum daily` | Daily Scrum: 進捗検査 + 適応 |
-| `/scrum review` | Sprint Review: ステークホルダーにインクリメント提示 |
-| `/scrum retro` | Retrospective: 振り返り + 組織改善 |
-| `/scrum refine` | Backlog Refinement: バックログ整理 |
-| `/scrum status` | 現在のスプリント状態 |
+| `/scrum status` | 現在の状態確認 |
+| `/scrum plan` | 手動で Sprint Planning |
+| `/scrum retro` | 手動で Retrospective |
+| `/scrum refine` | バックログ整理 |
 
-### ワークフロー
+## ファイル構造（導入先プロジェクト）
 
 ```
-/scrum          セットアップ + Product Goal 設定
-     |
-/scrum plan     Sprint Goal 設定 + 開発開始
-     |
-  [開発]        Dev agent が実装
-     |
-/scrum review   ステークホルダーに成果物を提示
-     |
-/scrum retro    振り返り + 組織ファイル改善 + git commit
-     |
-/scrum plan     改善された組織で次のスプリント開始
+docs/scrum/
+  backlog.md                         Product Backlog
+  definition-of-done.md              完了の定義
+  sprints/
+    current.md                       現在のスプリント
+    2026-02-22_sprint-001/           アーカイブ（日付+番号）
+      plan.md
+      log.md
+      review.md
+      retrospective.md
+  logs/
+    failures.md                      失敗ログ
+    decisions.md                     設計決定ログ
+    adaptations.md                   適応ログ
 ```
 
-## 仕組み
+## 自己成長
 
-### ユーザーの役割
-
-ユーザーは **ステークホルダー** です。「何が欲しいか」を伝えるだけで、仕様化・タスク分割・実装方法の決定は全てエージェントが行います。
-
-### エージェント
-
-| ロール | 責任 |
-|-------|------|
-| Product Owner | ステークホルダーの要望をバックログに変換 |
-| Scrum Master | プロセス改善、レトロスペクティブ、組織ファイル更新 |
-| Developer | 実装、テスト、インクリメント作成 |
-
-### 自己成長
-
-レトロスペクティブで SM エージェントが組織ファイルを改善します:
-- ルール (`.claude/rules/scrum-*.md`)
-- エージェント定義 (`.claude/agents/scrum-*.md`)
-- 完了の定義 (`.claude/scrum/definition-of-done.md`)
-
-変更は git commit され、組織の学習履歴として残ります。
+Retrospective で SM エージェントが組織ファイルを改善:
+- ルール、エージェント定義、完了の定義、CLAUDE.md
+- 全て git commit → 学習履歴として残る
 
 ## アンインストール
 
 ```bash
 rm ~/.claude/skills/scrum
 ```
-
-プロジェクト内の `.claude/scrum/` 等は手動で削除してください。

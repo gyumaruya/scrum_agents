@@ -3,7 +3,7 @@ name: scrum
 description: |
   Scrum framework for AI agent self-management. Brings Scrum practices into
   any project to drive development and continuous improvement.
-  First call sets up Scrum in the project. Then use subcommands for ceremonies.
+  First call sets up Scrum in the project. Ceremonies chain automatically.
   Triggers: "scrum", "sprint planning", "retrospective", "backlog", "sprint review",
   "振り返り", "スプリント", "バックログ", "レトロ", "計画"
 metadata:
@@ -15,140 +15,216 @@ metadata:
 
 Scrum is the MEANS, not the GOAL. The goal is delivering value to users.
 
+Arguments: $ARGUMENTS
+
 ## Argument Routing
 
 Parse `$ARGUMENTS` and route:
 
 | Argument | Action |
 |----------|--------|
-| (empty, first time) | Run Setup (see below) |
+| (empty, first time) | Run Setup |
 | (empty, already set up) | Show Status + suggest next action |
-| `plan` | Sprint Planning → see `references/ceremonies/sprint-planning.md` |
-| `daily` | Daily Scrum → see `references/ceremonies/daily-scrum.md` |
-| `review` | Sprint Review → see `references/ceremonies/sprint-review.md` |
-| `retro` | Retrospective → see `references/ceremonies/sprint-retrospective.md` |
-| `refine` | Backlog Refinement → see `references/ceremonies/backlog-refinement.md` |
+| `plan` | Sprint Planning → `references/ceremonies/sprint-planning.md` |
+| `daily` | Daily Scrum → `references/ceremonies/daily-scrum.md` |
+| `review` | Sprint Review → `references/ceremonies/sprint-review.md` |
+| `retro` | Retrospective → `references/ceremonies/sprint-retrospective.md` |
+| `refine` | Backlog Refinement → `references/ceremonies/backlog-refinement.md` |
 | `status` | Show current sprint status |
 
-**How to detect first time**: Check if `.claude/scrum/` directory exists in the current project.
+**Detect first time**: Check if `docs/scrum/` directory exists.
 
-Arguments: $ARGUMENTS
+---
+
+## Automatic Ceremony Flow
+
+**CRITICAL**: Ceremonies chain automatically. The user does NOT need to invoke each one.
+
+```
+User expresses desire
+  → PO auto-translates to backlog
+  → Sprint Planning auto-starts
+  → Dev implements
+  → When done: Review auto-runs → Retro auto-runs
+  → Next sprint ready
+```
+
+### Auto-trigger Rules (injected into CLAUDE.md at setup)
+
+1. **User says what they want** → Automatically spawn PO agent → backlog → plan → dev starts
+2. **Dev reports increment done** → Automatically run Sprint Review → present to user
+3. **User gives review feedback** → Automatically run Retrospective → commit improvements
+4. **Retro completes** → Report readiness for next sprint
+
+The user only needs to:
+- Express desires ("Xが欲しい")
+- Give feedback during Review ("いいね" / "ここ変えて")
+
+Everything else is automatic.
+
+---
+
+## File Structure
+
+All Scrum artifacts live in `docs/scrum/` -- visible, dated, scalable.
+
+```
+docs/scrum/
+  backlog.md                              # Product Backlog (living document)
+  definition-of-done.md                   # DoD (evolves through retros)
+  sprints/
+    current.md                            # Current sprint state
+    YYYY-MM-DD_sprint-NNN/                # Sprint archive (date + number)
+      plan.md                             # Sprint Goal + Backlog
+      log.md                              # Daily log
+      review.md                           # Sprint Review record
+      retrospective.md                    # Retrospective record
+  logs/
+    failures.md                           # Running failure log
+    decisions.md                          # Design decisions log
+    adaptations.md                        # Real-time adaptations log
+```
+
+**Naming convention**: `YYYY-MM-DD_sprint-NNN/` for temporal context + ordering.
 
 ---
 
 ## Setup (First-Time `/scrum`)
 
-When `.claude/scrum/` does NOT exist, run this setup:
+When `docs/scrum/` does NOT exist:
 
 ### Step 1: Detect Project
 
-- Check for existing `.claude/` structure
-- Detect tech stack (look for `pyproject.toml`, `package.json`, `Cargo.toml`, etc.)
-- Check for existing CLAUDE.md
+- Detect tech stack (`pyproject.toml`, `package.json`, `Cargo.toml`, etc.)
+- Check for existing CLAUDE.md and `docs/`
 
-### Step 2: Create Scrum Structure
+### Step 2: Create Structure
 
-Create these directories and files in the current project:
+Read reference files from this skill's `references/` directory and write to the project:
 
+**Scrum artifacts** (in `docs/scrum/`):
 ```
-.claude/
-  scrum/
-    current-sprint.md       ← copy from references/templates/current-sprint.md
-    product-backlog.md       ← copy from references/templates/product-backlog.md
-    definition-of-done.md    ← copy from references/templates/definition-of-done.md (adapt to tech stack)
-    sprint-history/          ← create empty directory
-  agents/                    ← create if not exists
-    scrum-product-owner.md   ← copy from references/agents/scrum-product-owner.md
-    scrum-master.md          ← copy from references/agents/scrum-master.md
-    scrum-developer.md       ← copy from references/agents/scrum-developer.md
-  rules/                     ← create if not exists
-    scrum-principles.md      ← copy from references/rules/scrum-principles.md
-    scrum-values.md          ← copy from references/rules/scrum-values.md
+docs/scrum/
+  backlog.md                 ← from references/templates/backlog.md
+  definition-of-done.md      ← from references/templates/definition-of-done.md (adapt to tech stack)
+  sprints/
+    current.md               ← from references/templates/current-sprint.md
+  logs/
+    failures.md              ← create empty with header
+    decisions.md             ← create empty with header
+    adaptations.md           ← create empty with header
 ```
 
-**IMPORTANT**: Read the reference files from this skill's `references/` directory and write them to the target project. Adapt the Definition of Done to the detected tech stack.
+**Agent definitions** (in `.claude/agents/`):
+```
+.claude/agents/
+  scrum-product-owner.md     ← from references/agents/scrum-product-owner.md
+  scrum-master.md            ← from references/agents/scrum-master.md
+  scrum-developer.md         ← from references/agents/scrum-developer.md
+```
+
+**Rules** (in `.claude/rules/`):
+```
+.claude/rules/
+  scrum-principles.md        ← from references/rules/scrum-principles.md
+  scrum-values.md            ← from references/rules/scrum-values.md
+```
 
 ### Step 3: Update CLAUDE.md
 
-Append this minimal section to the project's CLAUDE.md (create if needed):
+Append to the project's CLAUDE.md:
 
 ```markdown
 
 ## Scrum
 
-This project practices Scrum for agent self-management.
+This project practices Scrum. Ceremonies chain automatically.
 
-- Product Backlog: `.claude/scrum/product-backlog.md`
-- Current Sprint: `.claude/scrum/current-sprint.md`
-- Definition of Done: `.claude/scrum/definition-of-done.md`
-- Sprint History: `.claude/scrum/sprint-history/`
+### Artifacts
+- Product Backlog: `docs/scrum/backlog.md`
+- Current Sprint: `docs/scrum/sprints/current.md`
+- Definition of Done: `docs/scrum/definition-of-done.md`
+- Sprint Archive: `docs/scrum/sprints/YYYY-MM-DD_sprint-NNN/`
+- Logs: `docs/scrum/logs/` (failures, decisions, adaptations)
 
-Agents follow Scrum principles defined in `.claude/rules/scrum-principles.md`.
-Use `/scrum [plan|daily|review|retro|refine|status]` for ceremonies.
+### Automatic Flow
+When the user expresses a desire:
+1. PO agent translates it to backlog items
+2. Sprint Planning runs automatically (define goal, select items)
+3. Dev agent starts implementation immediately
+4. When increment is ready, Sprint Review runs automatically
+5. After review, Retrospective runs automatically (SM improves org files)
+
+The user only says what they want and gives feedback. Everything else is automatic.
+
+### Manual Commands
+`/scrum status` - View current state
+`/scrum plan` - Manually trigger planning
+`/scrum retro` - Manually trigger retrospective
+`/scrum refine` - Manually refine backlog
 ```
 
 ### Step 4: Ask for Product Goal
 
-Ask the stakeholder (user) in Japanese:
+"Scrum を導入しました。このプロジェクトで何を実現したいですか？"
 
-"Scrumフレームワークを導入しました。このプロジェクトの Product Goal は何ですか？何を実現したいですか？"
+### Step 5: Auto-flow
 
-### Step 5: Create Initial Backlog
-
-Spawn the `scrum-product-owner` agent to translate the stakeholder's response into
-Product Backlog items. Write them to `.claude/scrum/product-backlog.md`.
-
-### Step 6: Suggest Next Step
-
-"セットアップ完了。 `/scrum plan` で最初のスプリントを開始できます。"
+Spawn PO agent → create backlog → auto-start Sprint Planning → Dev begins.
+The user just answered one question and development is already underway.
 
 ---
 
-## Status (`/scrum` or `/scrum status`)
+## Status (`/scrum status`)
 
-When `.claude/scrum/` already exists:
-
-1. Read `.claude/scrum/current-sprint.md`
-2. Read `.claude/scrum/product-backlog.md`
-3. Count files in `.claude/scrum/sprint-history/`
+1. Read `docs/scrum/sprints/current.md`
+2. Read `docs/scrum/backlog.md`
+3. Count sprint archives in `docs/scrum/sprints/`
 4. Display in Japanese:
    - Current Sprint Goal (or "スプリント未開始")
-   - Sprint Backlog items and their status
-   - Product Backlog size
-   - Sprint count (how many completed)
-   - Suggested next action based on current state
+   - Items: done / in_progress / pending
+   - Backlog size
+   - Sprint count
+   - Recent log entries
 
 ---
 
-## Ceremony Dispatch
+## Sprint Archival
 
-For each ceremony, read the corresponding reference file and follow its instructions:
+When a sprint completes (after retrospective):
 
-- **Sprint Planning**: Read `references/ceremonies/sprint-planning.md`
-- **Daily Scrum**: Read `references/ceremonies/daily-scrum.md`
-- **Sprint Review**: Read `references/ceremonies/sprint-review.md`
-- **Sprint Retrospective**: Read `references/ceremonies/sprint-retrospective.md`
-- **Backlog Refinement**: Read `references/ceremonies/backlog-refinement.md`
-
-Each ceremony file contains:
-- When to use
-- Step-by-step process
-- Which agents to spawn
-- What files to read/write
-- How to transition to the next natural step
+1. Create `docs/scrum/sprints/YYYY-MM-DD_sprint-NNN/` directory
+2. Move/copy sprint artifacts into it:
+   - `plan.md` - Sprint Goal and selected items
+   - `log.md` - Daily progress log
+   - `review.md` - Review record
+   - `retrospective.md` - Retrospective record
+3. Reset `docs/scrum/sprints/current.md` for next sprint
+4. Commit the archive
 
 ---
 
-## Core Principle
+## Logging
 
-Every action serves one purpose: **deliver value to the stakeholder (user)**.
+All significant events get logged with timestamps:
 
-Scrum ceremonies are not bureaucracy -- they are tools that:
-- Sprint Planning: ensures we work on the right thing
-- Daily Scrum: keeps us on track
-- Sprint Review: validates we delivered value
-- Retrospective: makes us better at delivering value
-- Backlog Refinement: keeps our options clear
+**`docs/scrum/logs/failures.md`**: Things that went wrong
+```markdown
+## YYYY-MM-DD HH:MM - {title}
+{what happened, root cause, resolution}
+```
 
-If a ceremony doesn't serve this purpose in the current context, adapt or skip it.
-Scrum is empirical -- inspect and adapt.
+**`docs/scrum/logs/decisions.md`**: Design and technical decisions
+```markdown
+## YYYY-MM-DD - {decision title}
+**Context**: {why this decision was needed}
+**Decision**: {what was decided}
+**Rationale**: {why}
+```
+
+**`docs/scrum/logs/adaptations.md`**: Real-time adaptations during sprints
+```markdown
+## YYYY-MM-DD HH:MM - {adaptation}
+**Trigger**: {what was observed}
+**Change**: {what was adapted}
+```

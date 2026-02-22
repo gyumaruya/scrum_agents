@@ -1,69 +1,74 @@
 # Sprint Retrospective
 
-## When
+## When (Auto-trigger)
 
 - After Sprint Review completes
-- When process problems are detected
-- User says "振り返り", "レトロ", "retro", "改善"
+- When a significant process problem is detected mid-sprint
+- Manual: `/scrum retro`
 
 ## Process
 
 ### 1. Gather Data
 
-Spawn `scrum-master` agent with this context:
-
-Read and analyze:
-- `.claude/scrum/current-sprint.md` (what was planned vs done)
-- Recent git log (what actually happened)
-- `.claude/scrum/definition-of-done.md` (was it followed?)
+Spawn `scrum-master` agent. It reads:
+- `docs/scrum/sprints/current.md` (planned vs done)
+- `docs/scrum/logs/failures.md` (what went wrong)
+- `docs/scrum/logs/adaptations.md` (mid-sprint changes)
+- Recent git log
 - `.claude/agents/scrum-*.md` (did agents work well?)
 - `.claude/rules/scrum-*.md` (were rules helpful?)
+- `docs/scrum/definition-of-done.md` (was it followed?)
 
 ### 2. Generate Insights
 
-The SM agent identifies:
-- **What went well**: Keep doing these things (with evidence)
-- **What to improve**: Stop or change these things (with evidence)
-- **Surprises**: Unexpected issues or discoveries
+SM agent identifies with specific evidence:
+- What went well (keep doing)
+- What to improve (stop or change)
+- Surprises (unexpected)
 
-### 3. Select Most Impactful Change
+### 3. Make ONE Concrete Change
 
-Pick ONE improvement that would make the biggest difference.
-Do not try to fix everything at once.
+Pick the most impactful improvement. Actually edit the file:
 
-### 4. Make Concrete Changes
-
-The SM agent ACTUALLY EDITS the relevant file(s):
-
-Examples:
-- Add a rule to `.claude/rules/scrum-principles.md`
-- Update agent instructions in `.claude/agents/scrum-developer.md`
-- Add a DoD criterion to `.claude/scrum/definition-of-done.md`
-- Update CLAUDE.md with a new organizational constraint
+| Target | When |
+|--------|------|
+| `.claude/rules/scrum-*.md` | Process rules need updating |
+| `.claude/agents/scrum-*.md` | Agent behavior needs refinement |
+| `docs/scrum/definition-of-done.md` | Quality criteria need adjustment |
+| `CLAUDE.md` | Organizational constraints need updating |
 
 **Every change must cite evidence from this sprint.**
 
-### 5. Record Retrospective
+### 4. Archive Sprint
 
-Save to `.claude/scrum/sprint-history/sprint-{N}.md`
-using the format from the SM agent definition.
+Create `docs/scrum/sprints/YYYY-MM-DD_sprint-NNN/` and save:
+- `plan.md` -- Sprint Goal, selected items, approach
+- `log.md` -- Copy of daily log from current sprint
+- `review.md` -- Review outcome and stakeholder feedback
+- `retrospective.md` -- This retrospective's findings and changes
 
-### 6. Commit Changes
+### 5. Reset Current Sprint
 
-Stage and commit all changed files:
+Clear `docs/scrum/sprints/current.md` for next sprint.
+
+### 6. Commit
+
 ```
-git add .claude/
-git commit -m "Sprint {N} レトロスペクティブ: {改善内容の要約}"
+git add docs/scrum/ .claude/
+git commit -m "Sprint {N} 完了: {Sprint Goalの要約}
+
+レトロスペクティブ: {改善内容}
+"
 ```
 
 ## Output
 
 In Japanese:
-- What was inspected
-- Key insight
+- Sprint outcome summary
 - What was changed and why
-- File(s) modified
+- "次のスプリントは改善された状態で始まります。"
 
-## Next Step
+## Auto-next
 
-"次のスプリントを `/scrum plan` で開始できます。今回の改善が反映された状態で始まります。"
+Sprint archived. If backlog has items → suggest starting next sprint.
+If user has new desires → PO auto-translates → next sprint auto-starts.
