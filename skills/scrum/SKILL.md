@@ -9,7 +9,7 @@ description: |
 metadata:
   short-description: Scrum framework for AI agents
   argument-hint: "[install|uninstall|update|plan|daily|review|retro|refine|status]"
-  version: 1.3.1
+  version: 1.3.2
 ---
 
 # Scrum Skill
@@ -23,7 +23,7 @@ Arguments: $ARGUMENTS
 Before routing arguments, check for version mismatch:
 
 1. If `docs/scrum/` exists (not first-time setup):
-   - Read `metadata.version` from this SKILL.md (currently: `1.3.1`)
+   - Read `metadata.version` from this SKILL.md (currently: `1.3.2`)
    - Read `docs/scrum/.scrum-version` (if exists)
    - If versions differ or `.scrum-version` is missing: display "スキル v{new} が利用可能です（現在 v{old}）。`/scrum update` で更新してください。" (If `.scrum-version` is missing, treat as `unknown`.)
    - Continue with the requested action regardless (version check is informational only)
@@ -243,6 +243,7 @@ docs/scrum/
     failures.md                           # Failure log
     decisions.md                          # Design decisions
     adaptations.md                        # Real-time adaptations
+    role-interactions.md                  # Cross-role handoff log
 ```
 
 If external issue tracker is available, `docs/scrum/backlog.md` is optional.
@@ -329,7 +330,7 @@ Append `## Scrum (v{version})` section to CLAUDE.md. This section MUST include:
 - Artifact locations (backlog, sprint, DoD, logs)
 - Ceremony Auto-Flow diagram
 - Flow Rules (all 5)
-- Anti-Patterns table (all 6)
+- Anti-Patterns table (all 9)
 
 **This is critical.** Without this section in CLAUDE.md, new sessions won't load
 Scrum rules automatically. The `/scrum` skill is only invoked on demand -- CLAUDE.md
@@ -462,3 +463,4 @@ All events logged with timestamps in `docs/scrum/logs/`:
 | `failures.md` | Things that went wrong | `## YYYY-MM-DD HH:MM - {title}` |
 | `decisions.md` | Design/tech decisions | `## YYYY-MM-DD - {decision}` with Context/Decision/Rationale |
 | `adaptations.md` | Mid-sprint adaptations | `## YYYY-MM-DD HH:MM - {change}` with Trigger/Change |
+| `role-interactions.md` | Cross-role handoffs and reviews | `## YYYY-MM-DD HH:MM - {From} -> {To}: {Summary}` |
