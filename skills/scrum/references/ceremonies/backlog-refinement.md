@@ -55,7 +55,8 @@ Product Owner agent incorporates Dev input:
 
 ### 4. Present
 
-Show updated backlog briefly. Ask if priorities are correct.
+Show updated backlog briefly. State the new priority order.
+This is **non-blocking** -- do not wait for approval before writing.
 
 ### 5. Write
 
