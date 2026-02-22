@@ -81,4 +81,5 @@ Brief summary in Japanese, then development begins.
 
 ## Auto-next
 
-Development is underway. When increment is ready → auto-trigger Sprint Review.
+**Development starts immediately.** No pause, no "ready to begin?"
+When increment is ready → auto-trigger Sprint Review (no pause between).

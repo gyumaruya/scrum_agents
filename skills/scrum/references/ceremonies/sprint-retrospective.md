@@ -122,5 +122,8 @@ In Japanese:
 
 ## Auto-next
 
-Sprint archived. If backlog has items → suggest starting next sprint.
-If user has new desires → PO auto-translates → next sprint auto-starts.
+**Do NOT stop after archival.** Proceed automatically:
+
+1. If backlog has items → **start next Sprint Planning immediately** (no "shall I continue?")
+2. If backlog is empty → **self-generate work**: verify Product Goal achievement, propose technical improvements, discover new items. Never ask "what should I do next?"
+3. If user has new desires → PO auto-translates → next sprint auto-starts

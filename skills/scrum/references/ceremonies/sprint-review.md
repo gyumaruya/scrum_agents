@@ -72,9 +72,13 @@ or what got better for them. Focus on value, not implementation details.
 
 **Principle:** Lead with value, then collaborate on next steps. This is a dialogue, not a report.
 
-### 4. Gather Feedback
+### 4. Gather Feedback (Async)
 
 Ask briefly: "期待通りですか？変更や追加はありますか？"
+
+**This question is non-blocking.** Do NOT wait for a response. Proceed to Step 5
+and then to Retrospective immediately. If the stakeholder responds later, their
+feedback is captured in the next Backlog Refinement.
 
 ### 5. Update Backlog (PO)
 
@@ -91,4 +95,8 @@ Update `docs/scrum/sprints/current.md` log with review outcome.
 
 ## Auto-next
 
-After stakeholder feedback → auto-trigger Retrospective.
+**Do NOT wait for stakeholder feedback.** Present the increment, ask for feedback,
+then immediately proceed to Retrospective. Stakeholder feedback is asynchronous --
+if received later, it feeds into the next Backlog Refinement.
+
+After presenting increment → auto-trigger Retrospective (no pause, no "shall I continue?").
