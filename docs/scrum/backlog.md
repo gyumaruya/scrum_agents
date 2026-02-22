@@ -32,3 +32,4 @@
 ### [P11] Sprint Review Working Session -- DONE (Sprint 7)
 ### [P12] SM役割拡張 -- DONE (Sprint 7)
 ### [P13] Daily/Refinement修正 -- DONE (Sprint 7)
+### [P14] セレモニー自動連鎖の動作検証 -- DONE (Sprint 8)
