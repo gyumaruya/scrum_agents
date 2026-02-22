@@ -9,6 +9,11 @@
 | Plan Creation | **Dev** | -- | Plan written to `current.md` |
 | Process Check | **SM** | -- | Confirms process is sound |
 
+## Input
+- `docs/scrum/backlog.md` -- Ordered backlog items
+- `docs/scrum/sprints/current.md` -- Must show "No active sprint"
+- Previous sprint's retrospective (if any) -- Improvements to incorporate
+
 ## When (Auto-trigger)
 
 - Backlog has items and no sprint is active
@@ -45,6 +50,8 @@ Developer agent:
 - Break items into implementation steps
 - Identify risks and unknowns
 - Note in `docs/scrum/logs/decisions.md` if significant choices are made
+
+**Ownership:** The Sprint Backlog belongs to the Developers. Only they can modify it during the Sprint.
 
 ### 4. Process Inspection
 

@@ -8,7 +8,8 @@ description: |
   Triggers: "scrum", "sprint", "retrospective", "backlog", "レトロ", "計画", "振り返り"
 metadata:
   short-description: Scrum framework for AI agents
-  argument-hint: "[install|uninstall|plan|daily|review|retro|refine|status]"
+  argument-hint: "[install|uninstall|update|plan|daily|review|retro|refine|status]"
+  version: 1.0.0
 ---
 
 # Scrum Skill
@@ -16,6 +17,19 @@ metadata:
 Scrum is the MEANS, not the GOAL. The goal is delivering value to users.
 
 Arguments: $ARGUMENTS
+
+## Version Check (on every invocation)
+
+Before routing arguments, check for version mismatch:
+
+1. If `docs/scrum/` exists (not first-time setup):
+   - Read `metadata.version` from this SKILL.md (currently: `1.0.0`)
+   - Read `docs/scrum/.scrum-version` (if exists)
+   - If versions differ or `.scrum-version` is missing: display "スキル v{new} が利用可能です（現在 v{old}）。`/scrum update` で更新してください。" (If `.scrum-version` is missing, treat as `unknown`.)
+   - Continue with the requested action regardless (version check is informational only)
+2. If `docs/scrum/` does not exist: proceed to setup (no version check needed)
+
+---
 
 ## Argument Routing
 
@@ -30,6 +44,7 @@ Arguments: $ARGUMENTS
 | `review` | Sprint Review → `references/ceremonies/sprint-review.md` |
 | `retro` | Retrospective → `references/ceremonies/sprint-retrospective.md` |
 | `refine` | Backlog Refinement → `references/ceremonies/backlog-refinement.md` |
+| `update` | Update project Scrum files to match latest skill version |
 | `status` | Show current sprint status |
 
 **Detect first time**: Check if `docs/scrum/` directory exists in project root.
@@ -40,27 +55,33 @@ Arguments: $ARGUMENTS
 
 ### `/scrum install`
 
-Create a symlink so this skill is available globally:
+Install this skill globally so `/scrum` works in any project:
 
+1. **Detect skill location**: Find the directory containing this SKILL.md
+2. **Check existing installation**: If `~/.claude/skills/scrum` already exists, report "Already installed" and show the current link target
+3. **Create symlink**: `ln -s {SKILL_DIR} ~/.claude/skills/scrum`
+4. **Verify**: Confirm the link was created successfully
+
+**Example:**
 ```bash
-# Detect this skill's directory (where this SKILL.md lives)
-SKILL_DIR="$(pwd)/skills/scrum"  # or wherever this file is located
-ln -s "$SKILL_DIR" ~/.claude/skills/scrum
+ln -s /path/to/scrum_agents/skills/scrum ~/.claude/skills/scrum
 ```
 
-If `~/.claude/skills/scrum` already exists, report it and skip.
+If the link target differs from the current skill directory, ask whether to update it.
 
 ### `/scrum uninstall`
 
-```bash
-rm ~/.claude/skills/scrum
-```
+Remove the global skill symlink and optionally clean project files:
 
-Optionally ask if project-level Scrum files should also be removed:
-- `docs/scrum/` directory
-- `.claude/agents/scrum-*.md`
-- `.claude/rules/scrum-*.md`
-- Scrum section in CLAUDE.md
+1. **Remove symlink**: `rm ~/.claude/skills/scrum`
+2. **Ask about project files**: "プロジェクトのScrumファイルも削除しますか？"
+   - If yes, remove:
+     - `docs/scrum/` directory
+     - `.claude/agents/scrum-*.md`
+     - `.claude/rules/scrum-*.md`
+     - Scrum section in CLAUDE.md
+   - If no, keep project files (they still work as documentation)
+3. **Report**: Show what was removed
 
 ---
 
@@ -135,6 +156,7 @@ Local Scrum records (always created, regardless of tools):
 
 ```
 docs/scrum/
+  .scrum-version                          # Installed skill version (e.g., "1.0.0")
   definition-of-done.md                   # DoD (evolves through retros)
   sprints/
     current.md                            # Current sprint state
@@ -214,15 +236,23 @@ Or:
 - Code review: Direct stakeholder review
 ```
 
-### Step 4: Update CLAUDE.md
+### Step 4: Record Skill Version
+
+Write the current skill version to `docs/scrum/.scrum-version`:
+```
+1.0.0
+```
+This file is a single line containing only the version number. It is used by the Version Check to detect when the skill has been updated.
+
+### Step 5: Update CLAUDE.md
 
 Append Scrum section with artifact locations and auto-flow rules.
 
-### Step 5: Ask for Product Goal
+### Step 6: Ask for Product Goal
 
 "Scrum を導入しました。このプロジェクトで何を実現したいですか？"
 
-### Step 6: Auto-flow
+### Step 7: Auto-flow
 
 PO agent → create backlog → Sprint Planning → Dev starts.
 
@@ -233,19 +263,100 @@ PO agent → create backlog → Sprint Planning → Dev starts.
 1. Read `docs/scrum/sprints/current.md` for sprint state
 2. If external tracker available: query backlog and sprint items
 3. Count sprint archives in `docs/scrum/sprints/`
-4. Display in Japanese
+4. Display in Japanese using this format:
+
+**Output format:**
+
+```
+## {Project Name} Scrum Status
+
+**Current Sprint**: Sprint {N} -- {Goal}
+**Progress**: {completed}/{total} items done
+
+| Item | Status | What It Delivers |
+|------|--------|------------------|
+| {name} | {status} | {user-facing value} |
+
+**Backlog**: {N} items remaining
+**Completed Sprints**: {N} (Sprint 1-{N} archived)
+
+{If no active sprint: "No active sprint. Ready for next Sprint Planning."}
+```
+
+Focus on what the stakeholder cares about: what's being worked on, what they'll get, and what's next.
+
+---
+
+## Update (`/scrum update`)
+
+Update project Scrum files to match the latest skill version.
+
+### When (Auto-detect)
+
+On every `/scrum` invocation (any argument), the Version Check (above) compares versions:
+1. Read skill version from this SKILL.md's `metadata.version`
+2. Read project version from `docs/scrum/.scrum-version`
+3. If versions differ: show message "スキルバージョンが更新されています (v{old} -> v{new})。`/scrum update` で更新できます。"
+
+The update is NOT automatic -- the user must explicitly run `/scrum update`.
+
+### Process
+
+1. **Read versions**: Compare `metadata.version` with `docs/scrum/.scrum-version`
+2. **Identify changes**: List files that differ between templates and project
+3. **Update managed files**: For each Scrum-managed file:
+   - Read the current project file
+   - Read the latest template from `references/`
+   - Merge: keep project-specific content, update template-managed sections
+   - Files to check:
+     - `.claude/agents/scrum-*.md` <-- `references/agents/`
+     - `.claude/rules/scrum-*.md` <-- `references/rules/`
+     - `docs/scrum/definition-of-done.md` <-- `references/templates/definition-of-done.md`
+4. **Update version**: Write new version to `docs/scrum/.scrum-version`
+5. **Report**: Show what was updated in Japanese
+
+### Customization Preservation
+
+**Principle:** Never overwrite project-specific adaptations.
+
+Strategy:
+- **Agent definitions**: Update template sections (Role Boundary, Artifacts, Record Format). Preserve project-added sections (custom workflows, project-specific notes). When in doubt, show a diff to the user rather than overwriting.
+- **Rules**: Replace entirely (rules are skill-defined, not project-customized).
+- **DoD**: Update Scrum section only. Preserve Quality, Testing, Transparency sections (these are project-adapted by the team).
+- **CLAUDE.md**: Append/update Scrum section only. Never touch non-Scrum content.
+
+### Merge Strategy Details
+
+For agent definitions and DoD, use this merge approach:
+
+1. **Identify template-managed sections**: Sections that originate from the skill templates (e.g., "Role Boundary", "Artifacts" in agent definitions; "Scrum" section in DoD).
+2. **Identify project-specific sections**: Any sections or content added by the project team that are NOT in the template.
+3. **Merge**:
+   - Replace template-managed sections with the latest template content
+   - Keep project-specific sections intact at their current location
+   - If a section exists in both template and project with different content, prefer the template version for template-managed sections
+4. **Report changes**: List each file and what was updated vs. preserved
+
+### Version File
+
+`docs/scrum/.scrum-version` format:
+```
+1.0.0
+```
+Single line, just the version number. Created during `/scrum` setup (Step 4), updated by `/scrum update`.
 
 ---
 
 ## Sprint Archival
 
-After retrospective:
+**Executor: SM agent** -- after Retrospective Step 4 completes.
 
-1. Create `docs/scrum/sprints/YYYY-MM-DD_sprint-NNN/`
-2. Save: `plan.md`, `log.md`, `review.md`, `retrospective.md`
-3. Reset `docs/scrum/sprints/current.md`
-4. If external tracker: update item statuses (close completed items, etc.)
-5. Commit the archive
+1. **Determine sprint number**: Count existing `sprint-NNN` directories in `docs/scrum/sprints/`, add 1, zero-pad to 3 digits
+2. Create `docs/scrum/sprints/YYYY-MM-DD_sprint-NNN/` (date = retrospective execution date)
+3. Save: `plan.md`, `log.md`, `review.md`, `retrospective.md` (extracted from `current.md` and retrospective output)
+4. Reset `docs/scrum/sprints/current.md` to: `No active sprint. Backlog has items -- ready for Sprint Planning.`
+5. If external tracker: update item statuses (close completed items, etc.)
+6. Commit the archive
 
 ---
 

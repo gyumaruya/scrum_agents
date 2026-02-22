@@ -4,6 +4,8 @@
 
 {Defined during setup}
 
+**Rule:** The Scrum Team must fulfill (or abandon) one Product Goal before taking on the next.
+
 ---
 
 ## Items

@@ -11,6 +11,15 @@
 | Improvement Action | **SM** | -- | Organizational files changed |
 | Archival | **SM** | -- | Sprint archived |
 
+## Input
+- `docs/scrum/sprints/current.md` -- Sprint state (post-Review)
+- `docs/scrum/logs/failures.md` -- What went wrong
+- `docs/scrum/logs/adaptations.md` -- Mid-sprint changes
+- `docs/scrum/logs/role-interactions.md` -- Cross-role collaboration quality
+- `docs/scrum/definition-of-done.md` -- Was it followed?
+- `.claude/agents/scrum-*.md` -- Agent effectiveness
+- `.claude/rules/scrum-*.md` -- Rule effectiveness
+
 ## When (Auto-trigger)
 
 - After Sprint Review completes
@@ -61,17 +70,35 @@ Pick the most impactful improvement. Actually edit the file:
 
 **Every change must cite evidence from this sprint.**
 
-### 5. Archive Sprint
+**Note:** Identified improvements that are actionable may be added to the Sprint Backlog
+for the next Sprint. The most impactful improvement should be addressed as soon as possible.
 
-Create `docs/scrum/sprints/YYYY-MM-DD_sprint-NNN/` and save:
-- `plan.md` -- Sprint Goal, selected items, approach
-- `log.md` -- Copy of daily log from current sprint
-- `review.md` -- Review outcome and stakeholder feedback
-- `retrospective.md` -- This retrospective's findings and changes
+### 5. Archive Sprint (SM executes)
 
-### 6. Reset Current Sprint
+**Executor: SM agent.** This step is the SM's responsibility after completing Steps 1-4.
 
-Clear `docs/scrum/sprints/current.md` for next sprint.
+Create the sprint archive directory and save artifacts:
+
+1. **Determine sprint number**: Count existing `sprint-NNN` directories in `docs/scrum/sprints/`, add 1, zero-pad to 3 digits.
+2. **Determine date**: Use the date the retrospective is executed (today).
+3. **Create directory**: `docs/scrum/sprints/YYYY-MM-DD_sprint-NNN/`
+4. **Save 4 files** from `current.md` content:
+   - `plan.md` -- Sprint Goal, selected items, implementation steps (from current.md header + Selected Items + Implementation Steps sections)
+   - `log.md` -- Progress log (from current.md Log section)
+   - `review.md` -- Review outcome and stakeholder feedback (written during Sprint Review)
+   - `retrospective.md` -- This retrospective's findings and changes (from Steps 1-4 above)
+
+### 6. Reset Current Sprint (SM executes)
+
+**Executor: SM agent.** Reset immediately after archival.
+
+Replace `docs/scrum/sprints/current.md` contents with:
+
+```markdown
+# Current Sprint
+
+No active sprint. Backlog has items -- ready for Sprint Planning.
+```
 
 ### 7. Commit
 

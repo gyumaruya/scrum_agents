@@ -280,6 +280,80 @@ SM の4つの観察は、Sprint 1-3 を通じた改善ループの有効性と�
 - ロール境界の厳密な観点では SM 領域への越境だが、改善内容が正当であるため是正は不要
 - 今後の参考: DoD 変更の実行は SM に委譲し、PO は推奨にとどめるのが理想
 
+## 2026-02-23 00:25 - SM: Sprint 4 Archival (Retro Step 5-6 dogfooding)
+
+**Context**: Sprint 4 Retrospective -- SM が sprint-retrospective.md Step 5/6 に従いアーカイブを実動作で作成
+**Artifact**: `docs/scrum/sprints/2026-02-23_sprint-004/` (plan.md, log.md, review.md, retrospective.md), `docs/scrum/sprints/current.md` (リセット)
+**Review Result**: N/A (SM 実行)
+
+**Notes**:
+- 既存アーカイブ数: 3 (sprint-001, 002, 003) → 新規: sprint-004
+- ディレクトリ名: 2026-02-23_sprint-004 (Retro 実行日 + ゼロパディング3桁)
+- current.md を「No active sprint. Backlog has items -- ready for Sprint Planning.」にリセット
+- これにより Item 1 最後の AC (dogfooding) が達成。sprint-retrospective.md Step 5/6 で定義した手順が実動作した初の証跡
+
+## 2026-02-23 00:20 - SM + Dev: Sprint 4 Retrospective
+
+**Context**: Sprint 4 Retrospective -- SM がプロセス分析、Dev が Cross-Role Verification
+**Artifact**: scrum-master.md (Retrospective Record Format 改善), docs/scrum/sprints/2026-02-23_sprint-004/retrospective.md
+**Review Result**: CONFIRMED (Dev verification)
+
+**Notes**:
+- SM Concrete Change: scrum-master.md に「価値」フィールド、改善追跡テーブル、フォーマット原則を追加
+- Dev 検証: SM の4つの Well 観察、3つの Improve 観察、Concrete Change すべて CONFIRMED
+- Sprint 3 → 4 改善追跡: 3課題中3課題が「機能」または「完了」（全改善ループ成功）
+
+## 2026-02-23 00:10 - PO: Sprint 4 Acceptance Inspection (Review Step 2)
+
+**Context**: Sprint 4 Review -- PO が Dev のインクリメントを受入検査
+**Artifact**: sprint-retrospective.md, scrum-master.md, SKILL.md, definition-of-done.md テンプレート, backlog.md, current.md
+**Review Result**: partially achieved (Item 1: 5/6 AC approved, Item 2: 2/2 approved, Item 3: 2/2 approved)
+
+**Notes**:
+
+### AC 別判定
+
+| Item | AC | 判定 |
+|------|-----|------|
+| Item 1 | SM 責務明記 (sprint-retrospective.md) | approved |
+| Item 1 | SM 責務追記 (scrum-master.md) | approved |
+| Item 1 | SKILL.md 整合 | approved |
+| Item 1 | 採番ルール明記 | approved |
+| Item 1 | リセット状態定義 | approved |
+| Item 1 | dogfooding (Sprint 4 アーカイブ実動作) | needs-revision (Retro後にSMが実施予定) |
+| Item 2 | テンプレートに PO Review 項目反映 | approved |
+| Item 2 | 汎用的表現維持 | approved |
+| Item 3 | P1 Done マーク | approved (チェックボックス漏れを修正済み) |
+| Item 3 | P4 Done マーク | approved (チェックボックス漏れを修正済み) |
+
+### PO 所見
+アーカイブ連鎖の「仕様確立」は完全に達成。3ファイル間の整合が取れ、SM の実行責務が明確になった。dogfooding（実動作）は Retro 後に SM が実施することで完結する。Item 3 のチェックボックス漏れは軽微で即時修正済み。
+
+## 2026-02-22 23:30 - PO -> Dev -> SM: Sprint 4 Planning
+
+**Context**: Sprint 4 Planning -- PO が Goal 提案、Dev が実装計画、SM がプロセス検査
+**Artifact**: `docs/scrum/sprints/current.md` (Sprint 4)
+**Review Result**: SOUND (SM 検査)
+
+**Notes**:
+- Sprint Goal: 「Retro完了後のアーカイブ連鎖を確立し、セレモニー自動化を完成させる」
+- Selected Items: P2 セレモニーアーカイブ連鎖実装、P2 DoD テンプレートフィードバック、P1/P4 Done クローズ
+- Dev 見積: Total M (S+S+S+XS+M)
+- SM 検査: SOUND -- Sprint Goal 明確・測定可能、スコープ適切、Scrum 原則適合、Retro 改善反映済み、ロール分離遵守
+
+## 2026-02-22 23:00 - PO + Dev: Backlog Refinement (Sprint 3 -> Sprint 4 間)
+
+**Context**: Backlog Refinement -- PO がバックログを評価、Dev が技術的フィードバックを提供
+**Artifact**: `docs/scrum/backlog.md`
+**Review Result**: approved (stakeholder 承認済み)
+
+**Notes**:
+- PO 評価: P1/P4 は実質DONE候補、P2 が Sprint 4 主作業、P6 も達成に近い
+- Dev 技術インプット: 3タスク（S+M+S）、sprint-retrospective.md の責務未定義とSKILL.md食い違いを指摘
+- Sprint 3 Retro 優先課題3点を P2 の AC に統合（新規アイテム不要）
+- テンプレートへの改善フィードバック（DoD改善がスキルパッケージに未反映）をP2 ACに追加
+- ステークホルダー承認: 「ok.go」
+
 ## 2026-02-22 21:45 - Dev: Sprint 3 Retrospective Cross-Role Verification (Step 3)
 
 **Context**: Sprint 3 Retrospective -- Dev が SM のプロセス分析を検証
