@@ -71,3 +71,10 @@ Updated `docs/scrum/backlog.md` with:
 - Top 3 items ready for next sprint selection
 
 Brief summary in Japanese of what changed and why.
+
+## Auto-next
+
+Refinement is an ongoing activity, not a gate. After refinement completes:
+- **If no active sprint and backlog has items** → Start Sprint Planning immediately.
+- **If sprint is active** → Continue development. Refinement does not interrupt the sprint.
+- **Never stop after refinement to ask "what next?"** -- the backlog state determines the next action.
